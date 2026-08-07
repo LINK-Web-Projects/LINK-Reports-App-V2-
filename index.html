@@ -226,6 +226,23 @@ body::before{
 .hdr-prepared{font-size:10px;font-weight:500;letter-spacing:.5px;color:rgba(0,0,0,0.3);margin-top:2px}
 .hdr-r{display:flex;align-items:center;gap:8px}
 .hdr-divider{width:1px;height:16px;background:rgba(0,0,0,0.12);margin:0 2px;flex-shrink:0}
+/* Mobile hamburger — hidden by default, shown at ≤480px */
+#mobile-menu-btn{display:none;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:36px;height:36px;border-radius:8px;background:rgba(0,0,0,0.05);border:0.5px solid rgba(0,0,0,0.1);cursor:pointer;flex-shrink:0;align-self:center}
+#mobile-menu-btn span{display:block;width:16px;height:1.5px;background:rgba(0,0,0,0.55);border-radius:2px;transition:background .2s}
+/* Mobile dropdown — hidden by default, shown at ≤480px when open */
+#mobile-menu{display:none;overflow:hidden;max-height:0;transition:max-height .2s ease}
+#mobile-menu.open{max-height:400px}
+#mobile-menu-inner{background:var(--glass-bg);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--glass-border);border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,0.12);overflow:hidden;margin:6px 10px 0}
+#mobile-menu-admin{display:none;align-items:center;gap:8px;padding:9px 14px;background:rgba(232,56,45,0.06);border-bottom:0.5px solid rgba(232,56,45,0.15)}
+#app.admin-mode #mobile-menu-admin{display:flex}
+#mobile-menu-admin-dot{width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0}
+#mobile-menu-admin-label{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--red)}
+.mobile-menu-row{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:0.5px solid rgba(0,0,0,0.06);cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;width:100%;text-align:left;font-family:inherit}
+.mobile-menu-row:last-child{border-bottom:none}
+.mobile-menu-row:active{background:rgba(0,0,0,0.04)}
+.mobile-menu-icon{font-size:15px;width:18px;text-align:center;flex-shrink:0;color:rgba(0,0,0,0.45)}
+.mobile-menu-label{font-size:13px;font-weight:500;color:var(--text)}
+.mobile-menu-label-danger{font-size:13px;font-weight:500;color:var(--red)}
 .btn{padding:0 17px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:.4px;line-height:1;height:30px;display:inline-flex;align-items:center;transition:all .2s}
 .btn-red{background:var(--red);color:white;border:1px solid transparent}
 .btn-red:hover{background:var(--red-dark)}
@@ -1019,10 +1036,18 @@ body::before{
    MOBILE — PHONE (≤480px)
 ══════════════════════════════════════ */
 @media (max-width: 480px) {
-  /* Header — tighter */
-  .hdr{padding:0 12px}
-  .hdr-title{font-size:12px;letter-spacing:-.1px}
+  /* Header — tighter, flexible height for wrapping title */
+  .hdr{padding:10px 12px;height:auto;min-height:58px;align-items:center}
+  .hdr-title{font-size:12px;letter-spacing:-.1px;white-space:normal;line-height:1.25}
+  .hdr-prepared{display:none}
+  .hdr-r{display:none}
   .btn{padding:5px 8px;font-size:9px;min-width:68px}
+
+  /* Hamburger button — only visible on mobile */
+  #mobile-menu-btn{display:flex}
+
+  /* Mobile dropdown menu */
+  #mobile-menu{display:block}
 
   /* Period bar */
   #last-refreshed{display:none}
@@ -1373,6 +1398,36 @@ body::before{
       <button class="btn-icon" id="settings-btn" title="Settings"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="display:block"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
       <button class="btn-icon" id="logout-btn" title="Sign out"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="display:block"><path d="M12 3v9"/><path d="M18.36 5.64a9 9 0 1 1-12.73 0"/></svg></button>
     </div>
+    <!-- Mobile hamburger — only shown at ≤480px via CSS -->
+    <button id="mobile-menu-btn" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Mobile dropdown menu — positioned absolute, sits below header, ≤480px only -->
+  <div id="mobile-menu" aria-hidden="true">
+    <div id="mobile-menu-inner">
+      <div id="mobile-menu-admin">
+        <div id="mobile-menu-admin-dot"></div>
+        <div id="mobile-menu-admin-label">Admin mode</div>
+      </div>
+      <button class="mobile-menu-row" id="mobile-refresh-btn">
+        <span class="mobile-menu-icon">↻</span>
+        <span class="mobile-menu-label">Refresh</span>
+      </button>
+      <button class="mobile-menu-row" id="mobile-pdf-btn">
+        <span class="mobile-menu-icon">⬇</span>
+        <span class="mobile-menu-label">Export PDF</span>
+      </button>
+      <button class="mobile-menu-row" id="mobile-settings-btn">
+        <span class="mobile-menu-icon">⚙</span>
+        <span class="mobile-menu-label">Settings</span>
+      </button>
+      <button class="mobile-menu-row" id="mobile-logout-btn">
+        <span class="mobile-menu-icon" style="color:var(--red)">⏻</span>
+        <span class="mobile-menu-label-danger">Sign out</span>
+      </button>
+    </div>
   </div>
 
   <!-- PERIOD BAR -->
@@ -1404,7 +1459,7 @@ body::before{
       </div>
     </div>
 
-    <!-- TOP-LINE PERFORMANCE -->
+    <!-- TOP LINE PERFORMANCE -->
     <div>
       <div class="sh"><div class="sh-bar"></div><h2>Key Results</h2><div class="sh-line"></div></div>
       <div class="kpi-grid" id="ov-kpi-grid">
@@ -1458,7 +1513,7 @@ body::before{
 
     <!-- KPIs -->
     <div>
-      <div class="sh"><div class="sh-bar"></div><h2>Top-Line Campaign Performance</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2>Top Line Campaign Performance</h2><div class="sh-line"></div></div>
       <div class="kpi-grid">
         <div class="glass kpi">
           <div class="kpi-tag">Ad Clicks</div>
@@ -1642,7 +1697,7 @@ body::before{
 
     <!-- META KPIs — 3x2 grid -->
     <div>
-      <div class="sh"><div class="sh-bar"></div><h2>Top-Line Campaign Performance</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2>Top Line Campaign Performance</h2><div class="sh-line"></div></div>
       <div class="kpi-grid kpi-grid-3" id="meta-kpi-grid">
         <div class="glass kpi">
           <div class="kpi-tag">Ad Clicks</div>
@@ -1780,7 +1835,7 @@ body::before{
     <!-- ═══ FACEBOOK ADS TEMPLATE ═══ -->
     <div class="tmpl-content" id="tmpl-facebook-ads">
     <div>
-      <div class="sh"><div class="sh-bar"></div><h2>Top-Line Campaign Performance</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2>Top Line Campaign Performance</h2><div class="sh-line"></div></div>
       <div class="kpi-grid kpi-grid-3" id="fb-kpi-grid">
         <div class="glass kpi"><div class="kpi-tag">Ad Clicks</div><div class="kpi-val" id="fb-kpi-clicks">—</div><div class="kpi-trend"><span id="fb-kpi-clicks-trend" class="tup" style="display:none"></span><span class="tlbl" id="fb-kpi-clicks-tlbl"></span></div></div>
         <div class="glass kpi"><div class="kpi-tag">Reach</div><div class="kpi-val" id="fb-kpi-reach">—</div><div class="kpi-trend"><span id="fb-kpi-reach-trend" class="tup" style="display:none"></span><span class="tlbl" id="fb-kpi-reach-tlbl"></span></div></div>
@@ -1840,7 +1895,7 @@ body::before{
     <!-- ═══ INSTAGRAM ADS TEMPLATE ═══ -->
     <div class="tmpl-content" id="tmpl-instagram-ads">
     <div>
-      <div class="sh"><div class="sh-bar"></div><h2>Top-Line Campaign Performance</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2>Top Line Campaign Performance</h2><div class="sh-line"></div></div>
       <div class="kpi-grid kpi-grid-3" id="ig-kpi-grid">
         <div class="glass kpi"><div class="kpi-tag">Ad Clicks</div><div class="kpi-val" id="ig-kpi-clicks">—</div><div class="kpi-trend"><span id="ig-kpi-clicks-trend" class="tup" style="display:none"></span><span class="tlbl" id="ig-kpi-clicks-tlbl"></span></div></div>
         <div class="glass kpi"><div class="kpi-tag">Reach</div><div class="kpi-val" id="ig-kpi-reach">—</div><div class="kpi-trend"><span id="ig-kpi-reach-trend" class="tup" style="display:none"></span><span class="tlbl" id="ig-kpi-reach-tlbl"></span></div></div>
@@ -1902,7 +1957,7 @@ body::before{
 
     <!-- DISPLAY ADS KPIs — 3x2 grid -->
     <div>
-      <div class="sh"><div class="sh-bar"></div><h2>Top-Line Campaign Performance</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2>Top Line Campaign Performance</h2><div class="sh-line"></div></div>
       <div class="kpi-grid kpi-grid-3" id="disp-kpi-grid">
         <div class="glass kpi">
           <div class="kpi-tag">Ad Clicks</div>
@@ -2071,7 +2126,7 @@ body::before{
 
     <!-- YOUTUBE ADS KPIs — 3x2 grid -->
     <div>
-      <div class="sh"><div class="sh-bar"></div><h2>Top-Line Campaign Performance</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2>Top Line Campaign Performance</h2><div class="sh-line"></div></div>
       <div class="kpi-grid kpi-grid-3" id="yt-kpi-grid">
         <div class="glass kpi">
           <div class="kpi-tag">Ad Clicks</div>
@@ -2240,7 +2295,7 @@ body::before{
 
     <!-- LINKEDIN KPIs — 3x2 grid -->
     <div>
-      <div class="sh"><div class="sh-bar"></div><h2>Top-Line Campaign Performance</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2>Top Line Campaign Performance</h2><div class="sh-line"></div></div>
       <div class="kpi-grid kpi-grid-3" id="li-kpi-grid">
         <div class="glass kpi">
           <div class="kpi-tag">Ad Clicks</div>
@@ -2527,7 +2582,7 @@ const FIELD_DEFS = [
 ];
 
 // ── VERSION ──
-const APP_VERSION = '2.17.1';
+const APP_VERSION = '2.17.2';
 
 // ── STATE ──
 let currentClient = null;
@@ -2667,11 +2722,11 @@ async function fsDeleteLogo(clientId) {
 let activeTemplate = 'google-search'; // currently active report template
 // !! DO NOT hardcode real keys here — values are injected at build time by Netlify !!
 // Google Sheets API key (restricted to your domain in Google Cloud Console)
-const BUILT_IN_SHEETS_KEY   = '__SHEETS_API_KEY__';
+const BUILT_IN_SHEETS_KEY   = 'AIzaSyAOdcfK2ObwJJhB4kAKPJjhivvCTEJvuqs';
 // Mapbox token (restricted to your domain in Mapbox account)
-const BUILT_IN_MAPBOX_TOKEN = '__MAPBOX_TOKEN__';
+const BUILT_IN_MAPBOX_TOKEN = 'pk.eyJ1IjoiYnN0ZXJuIiwiYSI6ImNtbXd1dXlmdjJ1dWwycm9leGEzaTlsc3QifQ.wYjQ6RtCRPxtWZaQD_ylPg';
 // Admin suffix — injected at build time via Netlify environment variable
-const ADMIN_SUFFIX = '__ADMIN_SUFFIX__';
+const ADMIN_SUFFIX = '-link';
 const CLOUDINARY_CLOUD_NAME   = 'dpvpyevam';
 const CLOUDINARY_UPLOAD_PRESET = 'link-reports-creatives';
 let sheetsApiKey = '';
@@ -6789,6 +6844,60 @@ document.getElementById('refresh-btn').addEventListener('click', async () => {
 document.getElementById('logout-btn').addEventListener('click', () => {
   if (confirm('Sign out?')) logout();
 });
+
+// ── MOBILE HAMBURGER MENU ──
+(function() {
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  function openMenu() {
+    menu.classList.add('open');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    menu.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeMenu() {
+    menu.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menu.setAttribute('aria-hidden', 'true');
+  }
+
+  menuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  // Close on outside tap
+  document.addEventListener('click', (e) => {
+    if (menu.classList.contains('open') && !menu.contains(e.target) && e.target !== menuBtn) {
+      closeMenu();
+    }
+  });
+
+  // Refresh
+  document.getElementById('mobile-refresh-btn').addEventListener('click', () => {
+    closeMenu();
+    document.getElementById('refresh-btn').click();
+  });
+
+  // Export PDF
+  document.getElementById('mobile-pdf-btn').addEventListener('click', () => {
+    closeMenu();
+    window.print();
+  });
+
+  // Settings
+  document.getElementById('mobile-settings-btn').addEventListener('click', () => {
+    closeMenu();
+    document.getElementById('settings-btn').click();
+  });
+
+  // Sign out
+  document.getElementById('mobile-logout-btn').addEventListener('click', () => {
+    closeMenu();
+    document.getElementById('logout-btn').click();
+  });
+})();
 
 }); // end DOMContentLoaded (settings + button wiring)
 
