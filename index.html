@@ -1036,8 +1036,8 @@ body::before{
    MOBILE — PHONE (≤480px)
 ══════════════════════════════════════ */
 @media (max-width: 480px) {
-  /* Header — tighter, flexible height for wrapping title */
-  .hdr{padding:10px 12px;height:auto;min-height:58px;align-items:center}
+  /* Header — tighter, flexible height for wrapping title, constrained width */
+  .hdr{padding:10px 12px;height:auto;min-height:58px;align-items:center;box-sizing:border-box;width:calc(100% - 20px);margin:10px 10px 0}
   .hdr-title{font-size:12px;letter-spacing:-.1px;white-space:normal;line-height:1.25}
   .hdr-prepared{display:none}
   .hdr-r{display:none}
@@ -1048,6 +1048,12 @@ body::before{
 
   /* Mobile dropdown menu */
   #mobile-menu{display:block}
+
+  /* Report tab — full width on mobile */
+  .tmpl-nav{padding:6px 10px;box-sizing:border-box;width:100%}
+  .tmpl-toggle{width:100%}
+  .tmpl-btn{flex:1;text-align:center}
+  .tmpl-select{width:100%}
 
   /* Period bar */
   #last-refreshed{display:none}
