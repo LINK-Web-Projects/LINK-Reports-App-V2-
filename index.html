@@ -1040,6 +1040,11 @@ body::before{
   .hdr{padding:10px 12px;height:auto;min-height:58px;align-items:center;box-sizing:border-box;width:calc(100% - 20px);margin:10px 10px 0}
   .hdr-title{font-size:12px;letter-spacing:-.1px;white-space:normal;line-height:1.25}
   .hdr-prepared{display:none}
+
+  /* Section headers — allow long custom titles (v2.18.0 overrides) to wrap instead of clipping.
+     Base .sh h2 rule (nowrap) appears earlier in source, so this override wins. */
+  .sh h2{white-space:normal;line-height:1.35}
+  .sh-line{min-width:16px}
   .hdr-r{display:none}
   .btn{padding:5px 8px;font-size:9px;min-width:68px}
 
@@ -1467,7 +1472,7 @@ body::before{
 
     <!-- TOP LINE PERFORMANCE -->
     <div>
-      <div class="sh"><div class="sh-bar"></div><h2>Key Results</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="key_results_title">Key Results</h2><div class="sh-line"></div></div>
       <div class="kpi-grid" id="ov-kpi-grid">
         <div class="glass kpi" id="ov-kpi-box-1">
           <div class="kpi-tag" id="ov-kpi-1-tag">—</div>
@@ -1519,25 +1524,25 @@ body::before{
 
     <!-- KPIs -->
     <div>
-      <div class="sh"><div class="sh-bar"></div><h2>Top Line Campaign Performance</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="top_line_title">Top Line Campaign Performance</h2><div class="sh-line"></div></div>
       <div class="kpi-grid">
         <div class="glass kpi">
-          <div class="kpi-tag">Ad Clicks</div>
+          <div class="kpi-tag" data-title-key="kpi_clicks_title">Ad Clicks</div>
           <div class="kpi-val" id="kpi-clicks">—</div>
           <div class="kpi-trend"><span id="kpi-clicks-trend" class="tup" style="display:none"></span><span class="tlbl" id="kpi-clicks-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Impressions</div>
+          <div class="kpi-tag" data-title-key="kpi_impr_title">Impressions</div>
           <div class="kpi-val" id="kpi-impressions">—</div>
           <div class="kpi-trend"><span id="kpi-impressions-trend" class="tup" style="display:none"></span><span class="tlbl" id="kpi-impressions-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Avg. Click-Through Rate (CTR)</div>
+          <div class="kpi-tag" data-title-key="kpi_ctr_title">Avg. Click-Through Rate (CTR)</div>
           <div class="kpi-val" id="kpi-ctr">—</div>
           <div class="kpi-trend"><span id="kpi-ctr-trend" class="tdn" style="display:none"></span><span class="tlbl" id="kpi-ctr-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Avg. Cost-Per-Click (CPC)</div>
+          <div class="kpi-tag" data-title-key="kpi_cpc_title">Avg. Cost-Per-Click (CPC)</div>
           <div class="kpi-val" id="kpi-cpc">—</div>
           <div class="kpi-trend"><span id="kpi-cpc-trend" class="tup" style="display:none"></span><span class="tlbl" id="kpi-cpc-tlbl"></span></div>
         </div>
@@ -1566,9 +1571,9 @@ body::before{
 
     <!-- AUDIENCE SEGMENTATION (conditional) -->
     <div id="gs-audience-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Audience Segmentation</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="audience_title">Audience Segmentation</h2><div class="sh-line"></div></div>
       <div class="glass card card-auto">
-        <div class="ctitle">Audience Performance</div>
+        <div class="ctitle" data-title-key="audience_table_title">Audience Performance</div>
         <div class="audience-table-wrap" id="gs-audience-table-wrap">
           <div class="audience-empty">No audience data configured</div>
         </div>
@@ -1597,9 +1602,9 @@ body::before{
 
     <!-- KEYWORD ANALYSIS -->
     <div id="gs-keyword-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Keyword Analysis &amp; Insights</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="keyword_title">Keyword Analysis &amp; Insights</h2><div class="sh-line"></div></div>
       <div class="glass card" style="height:360px">
-        <div class="ctitle">Top Keywords by Clicks</div>
+        <div class="ctitle" data-title-key="keyword_chart_title">Top Keywords by Clicks</div>
         <div class="bar-list" id="kw-bar-list">
           <div style="flex:1;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-faint)">No data — configure cell mapping in Settings</div>
         </div>
@@ -1628,7 +1633,7 @@ body::before{
 
     <!-- GEOGRAPHIC — UNIFIED MAP + BAR CHART, TOGGLE-DRIVEN -->
     <div id="gs-geo-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Geographic Performance</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="geo_title">Geographic Performance</h2><div class="sh-line"></div></div>
       <div class="glass geo-card">
         <div class="geo-header-row">
           <div class="ctitle" id="gs-geo-map-title" style="margin-bottom:0">Ad Clicks By Zip Code</div>
@@ -1650,7 +1655,7 @@ body::before{
 
     <!-- DEMOGRAPHICS -->
     <div id="gs-demo-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Campaign Demographic Data</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="demo_title">Campaign Demographic Data</h2><div class="sh-line"></div></div>
       <div class="row-3">
         <div class="glass card" style="height:320px;padding:16px 16px 12px">
           <div class="ctitle ctitle-center">Gender Distribution</div>
@@ -1703,35 +1708,35 @@ body::before{
 
     <!-- META KPIs — 3x2 grid -->
     <div>
-      <div class="sh"><div class="sh-bar"></div><h2>Top Line Campaign Performance</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="top_line_title">Top Line Campaign Performance</h2><div class="sh-line"></div></div>
       <div class="kpi-grid kpi-grid-3" id="meta-kpi-grid">
         <div class="glass kpi">
-          <div class="kpi-tag">Ad Clicks</div>
+          <div class="kpi-tag" data-title-key="kpi_clicks_title">Ad Clicks</div>
           <div class="kpi-val" id="meta-kpi-clicks">—</div>
           <div class="kpi-trend"><span id="meta-kpi-clicks-trend" class="tup" style="display:none"></span><span class="tlbl" id="meta-kpi-clicks-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Reach</div>
+          <div class="kpi-tag" data-title-key="kpi_reach_title">Reach</div>
           <div class="kpi-val" id="meta-kpi-reach">—</div>
           <div class="kpi-trend"><span id="meta-kpi-reach-trend" class="tup" style="display:none"></span><span class="tlbl" id="meta-kpi-reach-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Impressions</div>
+          <div class="kpi-tag" data-title-key="kpi_impr_title">Impressions</div>
           <div class="kpi-val" id="meta-kpi-impr">—</div>
           <div class="kpi-trend"><span id="meta-kpi-impr-trend" class="tup" style="display:none"></span><span class="tlbl" id="meta-kpi-impr-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Avg. Click-Through Rate (CTR)</div>
+          <div class="kpi-tag" data-title-key="kpi_ctr_title">Avg. Click-Through Rate (CTR)</div>
           <div class="kpi-val" id="meta-kpi-ctr">—</div>
           <div class="kpi-trend"><span id="meta-kpi-ctr-trend" class="tdn" style="display:none"></span><span class="tlbl" id="meta-kpi-ctr-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Avg. Cost-Per-Click (CPC)</div>
+          <div class="kpi-tag" data-title-key="kpi_cpc_title">Avg. Cost-Per-Click (CPC)</div>
           <div class="kpi-val" id="meta-kpi-cpc">—</div>
           <div class="kpi-trend"><span id="meta-kpi-cpc-trend" class="tup" style="display:none"></span><span class="tlbl" id="meta-kpi-cpc-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Avg. Frequency</div>
+          <div class="kpi-tag" data-title-key="kpi_freq_title">Avg. Frequency</div>
           <div class="kpi-val" id="meta-kpi-freq">—</div>
           <div class="kpi-trend"><span id="meta-kpi-freq-trend" class="tneutral" style="display:none"></span><span class="tlbl" id="meta-kpi-freq-tlbl"></span></div>
         </div>
@@ -1760,9 +1765,9 @@ body::before{
 
     <!-- AUDIENCE SEGMENTATION (conditional) -->
     <div id="meta-audience-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Audience Segmentation</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="audience_title">Audience Segmentation</h2><div class="sh-line"></div></div>
       <div class="glass card card-auto">
-        <div class="ctitle">Audience Performance</div>
+        <div class="ctitle" data-title-key="audience_table_title">Audience Performance</div>
         <div class="audience-table-wrap" id="meta-audience-table-wrap">
           <div class="audience-empty">No audience data configured</div>
         </div>
@@ -1791,13 +1796,13 @@ body::before{
 
     <!-- TOP CONTENT (conditional) -->
     <div id="meta-content-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Top Content</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="content_title">Top Content</h2><div class="sh-line"></div></div>
       <div class="content-grid" id="meta-content-grid"></div>
     </div>
 
     <!-- META DEMOGRAPHICS -->
     <div id="meta-demo-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Campaign Demographic Data</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="demo_title">Campaign Demographic Data</h2><div class="sh-line"></div></div>
       <div class="row-2">
         <div class="glass card" style="height:340px">
           <div class="ctitle ctitle-center">Gender Distribution</div>
@@ -1841,14 +1846,14 @@ body::before{
     <!-- ═══ FACEBOOK ADS TEMPLATE ═══ -->
     <div class="tmpl-content" id="tmpl-facebook-ads">
     <div>
-      <div class="sh"><div class="sh-bar"></div><h2>Top Line Campaign Performance</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="top_line_title">Top Line Campaign Performance</h2><div class="sh-line"></div></div>
       <div class="kpi-grid kpi-grid-3" id="fb-kpi-grid">
-        <div class="glass kpi"><div class="kpi-tag">Ad Clicks</div><div class="kpi-val" id="fb-kpi-clicks">—</div><div class="kpi-trend"><span id="fb-kpi-clicks-trend" class="tup" style="display:none"></span><span class="tlbl" id="fb-kpi-clicks-tlbl"></span></div></div>
-        <div class="glass kpi"><div class="kpi-tag">Reach</div><div class="kpi-val" id="fb-kpi-reach">—</div><div class="kpi-trend"><span id="fb-kpi-reach-trend" class="tup" style="display:none"></span><span class="tlbl" id="fb-kpi-reach-tlbl"></span></div></div>
-        <div class="glass kpi"><div class="kpi-tag">Impressions</div><div class="kpi-val" id="fb-kpi-impr">—</div><div class="kpi-trend"><span id="fb-kpi-impr-trend" class="tup" style="display:none"></span><span class="tlbl" id="fb-kpi-impr-tlbl"></span></div></div>
-        <div class="glass kpi"><div class="kpi-tag">Avg. Click-Through Rate (CTR)</div><div class="kpi-val" id="fb-kpi-ctr">—</div><div class="kpi-trend"><span id="fb-kpi-ctr-trend" class="tdn" style="display:none"></span><span class="tlbl" id="fb-kpi-ctr-tlbl"></span></div></div>
-        <div class="glass kpi"><div class="kpi-tag">Avg. Cost-Per-Click (CPC)</div><div class="kpi-val" id="fb-kpi-cpc">—</div><div class="kpi-trend"><span id="fb-kpi-cpc-trend" class="tup" style="display:none"></span><span class="tlbl" id="fb-kpi-cpc-tlbl"></span></div></div>
-        <div class="glass kpi"><div class="kpi-tag">Avg. Frequency</div><div class="kpi-val" id="fb-kpi-freq">—</div><div class="kpi-trend"><span id="fb-kpi-freq-trend" class="tneutral" style="display:none"></span><span class="tlbl" id="fb-kpi-freq-tlbl"></span></div></div>
+        <div class="glass kpi"><div class="kpi-tag" data-title-key="kpi_clicks_title">Ad Clicks</div><div class="kpi-val" id="fb-kpi-clicks">—</div><div class="kpi-trend"><span id="fb-kpi-clicks-trend" class="tup" style="display:none"></span><span class="tlbl" id="fb-kpi-clicks-tlbl"></span></div></div>
+        <div class="glass kpi"><div class="kpi-tag" data-title-key="kpi_reach_title">Reach</div><div class="kpi-val" id="fb-kpi-reach">—</div><div class="kpi-trend"><span id="fb-kpi-reach-trend" class="tup" style="display:none"></span><span class="tlbl" id="fb-kpi-reach-tlbl"></span></div></div>
+        <div class="glass kpi"><div class="kpi-tag" data-title-key="kpi_impr_title">Impressions</div><div class="kpi-val" id="fb-kpi-impr">—</div><div class="kpi-trend"><span id="fb-kpi-impr-trend" class="tup" style="display:none"></span><span class="tlbl" id="fb-kpi-impr-tlbl"></span></div></div>
+        <div class="glass kpi"><div class="kpi-tag" data-title-key="kpi_ctr_title">Avg. Click-Through Rate (CTR)</div><div class="kpi-val" id="fb-kpi-ctr">—</div><div class="kpi-trend"><span id="fb-kpi-ctr-trend" class="tdn" style="display:none"></span><span class="tlbl" id="fb-kpi-ctr-tlbl"></span></div></div>
+        <div class="glass kpi"><div class="kpi-tag" data-title-key="kpi_cpc_title">Avg. Cost-Per-Click (CPC)</div><div class="kpi-val" id="fb-kpi-cpc">—</div><div class="kpi-trend"><span id="fb-kpi-cpc-trend" class="tup" style="display:none"></span><span class="tlbl" id="fb-kpi-cpc-tlbl"></span></div></div>
+        <div class="glass kpi"><div class="kpi-tag" data-title-key="kpi_freq_title">Avg. Frequency</div><div class="kpi-val" id="fb-kpi-freq">—</div><div class="kpi-trend"><span id="fb-kpi-freq-trend" class="tneutral" style="display:none"></span><span class="tlbl" id="fb-kpi-freq-tlbl"></span></div></div>
       </div>
     </div>
     <div id="fb-notes-performance-section" style="display:none">
@@ -1862,8 +1867,8 @@ body::before{
       </div>
     </div>
     <div id="fb-audience-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Audience Segmentation</h2><div class="sh-line"></div></div>
-      <div class="glass card card-auto"><div class="ctitle">Audience Performance</div><div class="audience-table-wrap" id="fb-audience-table-wrap"><div class="audience-empty">No audience data configured</div></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="audience_title">Audience Segmentation</h2><div class="sh-line"></div></div>
+      <div class="glass card card-auto"><div class="ctitle" data-title-key="audience_table_title">Audience Performance</div><div class="audience-table-wrap" id="fb-audience-table-wrap"><div class="audience-empty">No audience data configured</div></div></div>
     </div>
     <div id="fb-audience-notes-section" style="display:none">
       <div class="sh"><div class="sh-bar"></div><h2 id="fb-notes-audience-title">Audience Insights</h2><div class="sh-line"></div></div>
@@ -1876,11 +1881,11 @@ body::before{
       </div>
     </div>
     <div id="fb-content-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Top Content</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="content_title">Top Content</h2><div class="sh-line"></div></div>
       <div class="content-grid" id="fb-content-grid"></div>
     </div>
     <div id="fb-demo-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Campaign Demographic Data</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="demo_title">Campaign Demographic Data</h2><div class="sh-line"></div></div>
       <div class="row-2">
         <div class="glass card" style="height:340px"><div class="ctitle ctitle-center">Gender Distribution</div><div class="donut-body"><div class="dnut-wrap" id="fb-donut-gender"></div><div class="dleg" id="fb-dleg-gender"></div></div></div>
         <div class="glass card" style="height:340px"><div class="ctitle ctitle-center">Age Distribution</div><div class="donut-body"><div class="dnut-wrap" id="fb-donut-age"></div><div class="dleg" id="fb-dleg-age"></div></div></div>
@@ -1901,14 +1906,14 @@ body::before{
     <!-- ═══ INSTAGRAM ADS TEMPLATE ═══ -->
     <div class="tmpl-content" id="tmpl-instagram-ads">
     <div>
-      <div class="sh"><div class="sh-bar"></div><h2>Top Line Campaign Performance</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="top_line_title">Top Line Campaign Performance</h2><div class="sh-line"></div></div>
       <div class="kpi-grid kpi-grid-3" id="ig-kpi-grid">
-        <div class="glass kpi"><div class="kpi-tag">Ad Clicks</div><div class="kpi-val" id="ig-kpi-clicks">—</div><div class="kpi-trend"><span id="ig-kpi-clicks-trend" class="tup" style="display:none"></span><span class="tlbl" id="ig-kpi-clicks-tlbl"></span></div></div>
-        <div class="glass kpi"><div class="kpi-tag">Reach</div><div class="kpi-val" id="ig-kpi-reach">—</div><div class="kpi-trend"><span id="ig-kpi-reach-trend" class="tup" style="display:none"></span><span class="tlbl" id="ig-kpi-reach-tlbl"></span></div></div>
-        <div class="glass kpi"><div class="kpi-tag">Impressions</div><div class="kpi-val" id="ig-kpi-impr">—</div><div class="kpi-trend"><span id="ig-kpi-impr-trend" class="tup" style="display:none"></span><span class="tlbl" id="ig-kpi-impr-tlbl"></span></div></div>
-        <div class="glass kpi"><div class="kpi-tag">Avg. Click-Through Rate (CTR)</div><div class="kpi-val" id="ig-kpi-ctr">—</div><div class="kpi-trend"><span id="ig-kpi-ctr-trend" class="tdn" style="display:none"></span><span class="tlbl" id="ig-kpi-ctr-tlbl"></span></div></div>
-        <div class="glass kpi"><div class="kpi-tag">Avg. Cost-Per-Click (CPC)</div><div class="kpi-val" id="ig-kpi-cpc">—</div><div class="kpi-trend"><span id="ig-kpi-cpc-trend" class="tup" style="display:none"></span><span class="tlbl" id="ig-kpi-cpc-tlbl"></span></div></div>
-        <div class="glass kpi"><div class="kpi-tag">Avg. Frequency</div><div class="kpi-val" id="ig-kpi-freq">—</div><div class="kpi-trend"><span id="ig-kpi-freq-trend" class="tneutral" style="display:none"></span><span class="tlbl" id="ig-kpi-freq-tlbl"></span></div></div>
+        <div class="glass kpi"><div class="kpi-tag" data-title-key="kpi_clicks_title">Ad Clicks</div><div class="kpi-val" id="ig-kpi-clicks">—</div><div class="kpi-trend"><span id="ig-kpi-clicks-trend" class="tup" style="display:none"></span><span class="tlbl" id="ig-kpi-clicks-tlbl"></span></div></div>
+        <div class="glass kpi"><div class="kpi-tag" data-title-key="kpi_reach_title">Reach</div><div class="kpi-val" id="ig-kpi-reach">—</div><div class="kpi-trend"><span id="ig-kpi-reach-trend" class="tup" style="display:none"></span><span class="tlbl" id="ig-kpi-reach-tlbl"></span></div></div>
+        <div class="glass kpi"><div class="kpi-tag" data-title-key="kpi_impr_title">Impressions</div><div class="kpi-val" id="ig-kpi-impr">—</div><div class="kpi-trend"><span id="ig-kpi-impr-trend" class="tup" style="display:none"></span><span class="tlbl" id="ig-kpi-impr-tlbl"></span></div></div>
+        <div class="glass kpi"><div class="kpi-tag" data-title-key="kpi_ctr_title">Avg. Click-Through Rate (CTR)</div><div class="kpi-val" id="ig-kpi-ctr">—</div><div class="kpi-trend"><span id="ig-kpi-ctr-trend" class="tdn" style="display:none"></span><span class="tlbl" id="ig-kpi-ctr-tlbl"></span></div></div>
+        <div class="glass kpi"><div class="kpi-tag" data-title-key="kpi_cpc_title">Avg. Cost-Per-Click (CPC)</div><div class="kpi-val" id="ig-kpi-cpc">—</div><div class="kpi-trend"><span id="ig-kpi-cpc-trend" class="tup" style="display:none"></span><span class="tlbl" id="ig-kpi-cpc-tlbl"></span></div></div>
+        <div class="glass kpi"><div class="kpi-tag" data-title-key="kpi_freq_title">Avg. Frequency</div><div class="kpi-val" id="ig-kpi-freq">—</div><div class="kpi-trend"><span id="ig-kpi-freq-trend" class="tneutral" style="display:none"></span><span class="tlbl" id="ig-kpi-freq-tlbl"></span></div></div>
       </div>
     </div>
     <div id="ig-notes-performance-section" style="display:none">
@@ -1922,8 +1927,8 @@ body::before{
       </div>
     </div>
     <div id="ig-audience-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Audience Segmentation</h2><div class="sh-line"></div></div>
-      <div class="glass card card-auto"><div class="ctitle">Audience Performance</div><div class="audience-table-wrap" id="ig-audience-table-wrap"><div class="audience-empty">No audience data configured</div></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="audience_title">Audience Segmentation</h2><div class="sh-line"></div></div>
+      <div class="glass card card-auto"><div class="ctitle" data-title-key="audience_table_title">Audience Performance</div><div class="audience-table-wrap" id="ig-audience-table-wrap"><div class="audience-empty">No audience data configured</div></div></div>
     </div>
     <div id="ig-audience-notes-section" style="display:none">
       <div class="sh"><div class="sh-bar"></div><h2 id="ig-notes-audience-title">Audience Insights</h2><div class="sh-line"></div></div>
@@ -1936,11 +1941,11 @@ body::before{
       </div>
     </div>
     <div id="ig-content-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Top Content</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="content_title">Top Content</h2><div class="sh-line"></div></div>
       <div class="content-grid" id="ig-content-grid"></div>
     </div>
     <div id="ig-demo-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Campaign Demographic Data</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="demo_title">Campaign Demographic Data</h2><div class="sh-line"></div></div>
       <div class="row-2">
         <div class="glass card" style="height:340px"><div class="ctitle ctitle-center">Gender Distribution</div><div class="donut-body"><div class="dnut-wrap" id="ig-donut-gender"></div><div class="dleg" id="ig-dleg-gender"></div></div></div>
         <div class="glass card" style="height:340px"><div class="ctitle ctitle-center">Age Distribution</div><div class="donut-body"><div class="dnut-wrap" id="ig-donut-age"></div><div class="dleg" id="ig-dleg-age"></div></div></div>
@@ -1963,35 +1968,35 @@ body::before{
 
     <!-- DISPLAY ADS KPIs — 3x2 grid -->
     <div>
-      <div class="sh"><div class="sh-bar"></div><h2>Top Line Campaign Performance</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="top_line_title">Top Line Campaign Performance</h2><div class="sh-line"></div></div>
       <div class="kpi-grid kpi-grid-3" id="disp-kpi-grid">
         <div class="glass kpi">
-          <div class="kpi-tag">Ad Clicks</div>
+          <div class="kpi-tag" data-title-key="kpi_clicks_title">Ad Clicks</div>
           <div class="kpi-val" id="disp-kpi-clicks">—</div>
           <div class="kpi-trend"><span id="disp-kpi-clicks-trend" class="tup" style="display:none"></span><span class="tlbl" id="disp-kpi-clicks-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Reach</div>
+          <div class="kpi-tag" data-title-key="kpi_reach_title">Reach</div>
           <div class="kpi-val" id="disp-kpi-reach">—</div>
           <div class="kpi-trend"><span id="disp-kpi-reach-trend" class="tup" style="display:none"></span><span class="tlbl" id="disp-kpi-reach-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Impressions</div>
+          <div class="kpi-tag" data-title-key="kpi_impr_title">Impressions</div>
           <div class="kpi-val" id="disp-kpi-impr">—</div>
           <div class="kpi-trend"><span id="disp-kpi-impr-trend" class="tup" style="display:none"></span><span class="tlbl" id="disp-kpi-impr-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Avg. Click-Through Rate (CTR)</div>
+          <div class="kpi-tag" data-title-key="kpi_ctr_title">Avg. Click-Through Rate (CTR)</div>
           <div class="kpi-val" id="disp-kpi-ctr">—</div>
           <div class="kpi-trend"><span id="disp-kpi-ctr-trend" class="tdn" style="display:none"></span><span class="tlbl" id="disp-kpi-ctr-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Avg. Cost-Per-Click (CPC)</div>
+          <div class="kpi-tag" data-title-key="kpi_cpc_title">Avg. Cost-Per-Click (CPC)</div>
           <div class="kpi-val" id="disp-kpi-cpc">—</div>
           <div class="kpi-trend"><span id="disp-kpi-cpc-trend" class="tup" style="display:none"></span><span class="tlbl" id="disp-kpi-cpc-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Avg. Frequency</div>
+          <div class="kpi-tag" data-title-key="kpi_freq_title">Avg. Frequency</div>
           <div class="kpi-val" id="disp-kpi-freq">—</div>
           <div class="kpi-trend"><span id="disp-kpi-freq-trend" class="tneutral" style="display:none"></span><span class="tlbl" id="disp-kpi-freq-tlbl"></span></div>
         </div>
@@ -2020,9 +2025,9 @@ body::before{
 
     <!-- DISPLAY ADS AUDIENCE SEGMENTATION (conditional) -->
     <div id="disp-audience-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Audience Segmentation</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="audience_title">Audience Segmentation</h2><div class="sh-line"></div></div>
       <div class="glass card card-auto">
-        <div class="ctitle">Audience Performance</div>
+        <div class="ctitle" data-title-key="audience_table_title">Audience Performance</div>
         <div class="audience-table-wrap" id="disp-audience-table-wrap">
           <div class="audience-empty">No audience data configured</div>
         </div>
@@ -2051,13 +2056,13 @@ body::before{
 
     <!-- DISPLAY ADS TOP CONTENT (conditional) -->
     <div id="disp-content-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Top Content</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="content_title">Top Content</h2><div class="sh-line"></div></div>
       <div class="content-grid" id="disp-content-grid"></div>
     </div>
 
     <!-- DISPLAY ADS GEOGRAPHIC PERFORMANCE (conditional) -->
     <div id="disp-geo-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Geographic Performance</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="geo_title">Geographic Performance</h2><div class="sh-line"></div></div>
       <div class="glass geo-card">
         <div class="geo-header-row">
           <div class="ctitle" id="disp-geo-map-title" style="margin-bottom:0">Ad Clicks By Zip Code</div>
@@ -2079,7 +2084,7 @@ body::before{
 
     <!-- DISPLAY ADS DEMOGRAPHICS — 3 donuts -->
     <div id="disp-demo-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Campaign Demographic Data</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="demo_title">Campaign Demographic Data</h2><div class="sh-line"></div></div>
       <div class="row-3">
         <div class="glass card" style="height:320px;padding:16px 16px 12px">
           <div class="ctitle ctitle-center">Gender Distribution</div>
@@ -2132,35 +2137,35 @@ body::before{
 
     <!-- YOUTUBE ADS KPIs — 3x2 grid -->
     <div>
-      <div class="sh"><div class="sh-bar"></div><h2>Top Line Campaign Performance</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="top_line_title">Top Line Campaign Performance</h2><div class="sh-line"></div></div>
       <div class="kpi-grid kpi-grid-3" id="yt-kpi-grid">
         <div class="glass kpi">
-          <div class="kpi-tag">Ad Clicks</div>
+          <div class="kpi-tag" data-title-key="kpi_clicks_title">Ad Clicks</div>
           <div class="kpi-val" id="yt-kpi-clicks">—</div>
           <div class="kpi-trend"><span id="yt-kpi-clicks-trend" class="tup" style="display:none"></span><span class="tlbl" id="yt-kpi-clicks-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Reach</div>
+          <div class="kpi-tag" data-title-key="kpi_reach_title">Reach</div>
           <div class="kpi-val" id="yt-kpi-reach">—</div>
           <div class="kpi-trend"><span id="yt-kpi-reach-trend" class="tup" style="display:none"></span><span class="tlbl" id="yt-kpi-reach-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Impressions</div>
+          <div class="kpi-tag" data-title-key="kpi_impr_title">Impressions</div>
           <div class="kpi-val" id="yt-kpi-impr">—</div>
           <div class="kpi-trend"><span id="yt-kpi-impr-trend" class="tup" style="display:none"></span><span class="tlbl" id="yt-kpi-impr-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Avg. Click-Through Rate (CTR)</div>
+          <div class="kpi-tag" data-title-key="kpi_ctr_title">Avg. Click-Through Rate (CTR)</div>
           <div class="kpi-val" id="yt-kpi-ctr">—</div>
           <div class="kpi-trend"><span id="yt-kpi-ctr-trend" class="tdn" style="display:none"></span><span class="tlbl" id="yt-kpi-ctr-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Avg. Cost-Per-Click (CPC)</div>
+          <div class="kpi-tag" data-title-key="kpi_cpc_title">Avg. Cost-Per-Click (CPC)</div>
           <div class="kpi-val" id="yt-kpi-cpc">—</div>
           <div class="kpi-trend"><span id="yt-kpi-cpc-trend" class="tup" style="display:none"></span><span class="tlbl" id="yt-kpi-cpc-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Avg. Frequency</div>
+          <div class="kpi-tag" data-title-key="kpi_freq_title">Avg. Frequency</div>
           <div class="kpi-val" id="yt-kpi-freq">—</div>
           <div class="kpi-trend"><span id="yt-kpi-freq-trend" class="tneutral" style="display:none"></span><span class="tlbl" id="yt-kpi-freq-tlbl"></span></div>
         </div>
@@ -2189,9 +2194,9 @@ body::before{
 
     <!-- YOUTUBE ADS AUDIENCE SEGMENTATION (conditional) -->
     <div id="yt-audience-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Audience Segmentation</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="audience_title">Audience Segmentation</h2><div class="sh-line"></div></div>
       <div class="glass card card-auto">
-        <div class="ctitle">Audience Performance</div>
+        <div class="ctitle" data-title-key="audience_table_title">Audience Performance</div>
         <div class="audience-table-wrap" id="yt-audience-table-wrap">
           <div class="audience-empty">No audience data configured</div>
         </div>
@@ -2220,13 +2225,13 @@ body::before{
 
     <!-- YOUTUBE ADS TOP CONTENT (conditional) -->
     <div id="yt-content-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Top Content</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="content_title">Top Content</h2><div class="sh-line"></div></div>
       <div class="content-grid" id="yt-content-grid"></div>
     </div>
 
     <!-- YOUTUBE ADS GEOGRAPHIC PERFORMANCE (conditional) -->
     <div id="yt-geo-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Geographic Performance</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="geo_title">Geographic Performance</h2><div class="sh-line"></div></div>
       <div class="glass geo-card">
         <div class="geo-header-row">
           <div class="ctitle" id="yt-geo-map-title" style="margin-bottom:0">Ad Clicks By Zip Code</div>
@@ -2248,7 +2253,7 @@ body::before{
 
     <!-- YOUTUBE ADS DEMOGRAPHICS — 3 donuts -->
     <div id="yt-demo-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Campaign Demographic Data</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="demo_title">Campaign Demographic Data</h2><div class="sh-line"></div></div>
       <div class="row-3">
         <div class="glass card" style="height:320px;padding:16px 16px 12px">
           <div class="ctitle ctitle-center">Gender Distribution</div>
@@ -2301,35 +2306,35 @@ body::before{
 
     <!-- LINKEDIN KPIs — 3x2 grid -->
     <div>
-      <div class="sh"><div class="sh-bar"></div><h2>Top Line Campaign Performance</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="top_line_title">Top Line Campaign Performance</h2><div class="sh-line"></div></div>
       <div class="kpi-grid kpi-grid-3" id="li-kpi-grid">
         <div class="glass kpi">
-          <div class="kpi-tag">Ad Clicks</div>
+          <div class="kpi-tag" data-title-key="kpi_clicks_title">Ad Clicks</div>
           <div class="kpi-val" id="li-kpi-clicks">—</div>
           <div class="kpi-trend"><span id="li-kpi-clicks-trend" class="tup" style="display:none"></span><span class="tlbl" id="li-kpi-clicks-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Reach</div>
+          <div class="kpi-tag" data-title-key="kpi_reach_title">Reach</div>
           <div class="kpi-val" id="li-kpi-reach">—</div>
           <div class="kpi-trend"><span id="li-kpi-reach-trend" class="tup" style="display:none"></span><span class="tlbl" id="li-kpi-reach-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Impressions</div>
+          <div class="kpi-tag" data-title-key="kpi_impr_title">Impressions</div>
           <div class="kpi-val" id="li-kpi-impr">—</div>
           <div class="kpi-trend"><span id="li-kpi-impr-trend" class="tup" style="display:none"></span><span class="tlbl" id="li-kpi-impr-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Avg. Click-Through Rate (CTR)</div>
+          <div class="kpi-tag" data-title-key="kpi_ctr_title">Avg. Click-Through Rate (CTR)</div>
           <div class="kpi-val" id="li-kpi-ctr">—</div>
           <div class="kpi-trend"><span id="li-kpi-ctr-trend" class="tdn" style="display:none"></span><span class="tlbl" id="li-kpi-ctr-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Avg. Cost-Per-Click (CPC)</div>
+          <div class="kpi-tag" data-title-key="kpi_cpc_title">Avg. Cost-Per-Click (CPC)</div>
           <div class="kpi-val" id="li-kpi-cpc">—</div>
           <div class="kpi-trend"><span id="li-kpi-cpc-trend" class="tup" style="display:none"></span><span class="tlbl" id="li-kpi-cpc-tlbl"></span></div>
         </div>
         <div class="glass kpi">
-          <div class="kpi-tag">Avg. Frequency</div>
+          <div class="kpi-tag" data-title-key="kpi_freq_title">Avg. Frequency</div>
           <div class="kpi-val" id="li-kpi-freq">—</div>
           <div class="kpi-trend"><span id="li-kpi-freq-trend" class="tneutral" style="display:none"></span><span class="tlbl" id="li-kpi-freq-tlbl"></span></div>
         </div>
@@ -2358,9 +2363,9 @@ body::before{
 
     <!-- LINKEDIN AUDIENCE SEGMENTATION (conditional) -->
     <div id="li-audience-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Audience Segmentation</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="audience_title">Audience Segmentation</h2><div class="sh-line"></div></div>
       <div class="glass card card-auto">
-        <div class="ctitle">Audience Performance</div>
+        <div class="ctitle" data-title-key="audience_table_title">Audience Performance</div>
         <div class="audience-table-wrap" id="li-audience-table-wrap">
           <div class="audience-empty">No audience data configured</div>
         </div>
@@ -2389,7 +2394,7 @@ body::before{
 
     <!-- LINKEDIN TOP CONTENT (conditional) -->
     <div id="li-content-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2>Top Content</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="content_title">Top Content</h2><div class="sh-line"></div></div>
       <div class="content-grid" id="li-content-grid"></div>
     </div>
 
@@ -2588,7 +2593,7 @@ const FIELD_DEFS = [
 ];
 
 // ── VERSION ──
-const APP_VERSION = '2.17.2';
+const APP_VERSION = '2.18.0';
 
 // ── STATE ──
 let currentClient = null;
@@ -2837,8 +2842,32 @@ const SHARED_VALUE_FIELDS = new Set([
   'author1Name','author1Title','author2Name','author2Title',
 ]);
 
+// ── SECTION TITLE FIELD MAP (v2.18.0) — shared by every template config tab ──
+// Optional title overrides. Each label maps to the data-title-key on the element(s) it
+// renames; blank or n/a keeps the default text in the HTML. A template simply ignores
+// labels for sections it doesn't have. Visibility is NOT affected by these fields.
+const SECTION_TITLE_FIELD_MAP = {
+  'Audience segmentation title':                   'audience_title',
+  'Audience table title':                          'audience_table_title',
+  'Top-line performance title':                    'top_line_title',
+  'Key results title':                             'key_results_title',
+  'Keyword analysis title':                        'keyword_title',
+  'Keyword chart title':                           'keyword_chart_title',
+  'Top content title':                             'content_title',
+  'Geographic title':                              'geo_title',
+  'Demographics title':                            'demo_title',
+  'KPI - ad clicks (title)':                       'kpi_clicks_title',
+  'KPI - reach (title)':                           'kpi_reach_title',
+  'KPI - impressions (title)':                     'kpi_impr_title',
+  'KPI - CTR (title)':                             'kpi_ctr_title',
+  'KPI - CPC (title)':                             'kpi_cpc_title',
+  'KPI - frequency (title)':                       'kpi_freq_title',
+};
+const SECTION_TITLE_FIELDS = new Set(Object.values(SECTION_TITLE_FIELD_MAP));
+
 // ── GOOGLE SEARCH CONFIG FIELD MAP (_config_google tab) ──
 const CONFIG_FIELD_MAP = {
+  ...SECTION_TITLE_FIELD_MAP,
   'Report tab title':                               'reportTabTitle',
   'KPI - ad clicks (value)':                       'kpi_clicks',
   'KPI - ad clicks (trend)':                       'kpi_clicks_trend',
@@ -2862,6 +2891,7 @@ const CONFIG_FIELD_MAP = {
   'Final thoughts label':                          'notes_final_label',
 };
 const CONFIG_VALUE_FIELDS = new Set([
+  ...SECTION_TITLE_FIELDS,
   'reportTabTitle','kpi_tlbl',
   'notes_performance_label','notes_audience_label',
   'notes_keywords_label','notes_final_label',
@@ -2875,6 +2905,7 @@ const CONFIG_MAPPING_FIELDS = new Set([
 
 // ── META CONFIG FIELD MAP (_config_meta tab) ──
 const META_CONFIG_FIELD_MAP = {
+  ...SECTION_TITLE_FIELD_MAP,
   'Report tab title':                               'reportTabTitle',
   'KPI - ad clicks (value)':                       'kpi_clicks',
   'KPI - ad clicks (trend)':                       'kpi_clicks_trend',
@@ -2904,6 +2935,7 @@ const META_CONFIG_FIELD_MAP = {
   'Final thoughts label':                          'notes_final_label',
 };
 const META_VALUE_FIELDS = new Set([
+  ...SECTION_TITLE_FIELDS,
   'reportTabTitle','kpi_tlbl',
   'content1_label','content2_label','content3_label','content_metric_labels',
   'notes_performance_label','notes_audience_label','notes_final_label',
@@ -2918,6 +2950,7 @@ const META_MAPPING_FIELDS = new Set([
 
 // ── FACEBOOK ADS CONFIG FIELD MAP ──
 const FB_CONFIG_FIELD_MAP = {
+  ...SECTION_TITLE_FIELD_MAP,
   'Report tab title':                               'reportTabTitle',
   'KPI - ad clicks (value)':                       'kpi_clicks',
   'KPI - ad clicks (trend)':                       'kpi_clicks_trend',
@@ -2947,6 +2980,7 @@ const FB_CONFIG_FIELD_MAP = {
   'Final thoughts label':                          'notes_final_label',
 };
 const FB_VALUE_FIELDS = new Set([
+  ...SECTION_TITLE_FIELDS,
   'reportTabTitle','kpi_tlbl',
   'content1_label','content2_label','content3_label','content_metric_labels',
   'notes_performance_label','notes_audience_label','notes_final_label',
@@ -2961,6 +2995,7 @@ const FB_MAPPING_FIELDS = new Set([
 
 // ── INSTAGRAM ADS CONFIG FIELD MAP ──
 const IG_CONFIG_FIELD_MAP = {
+  ...SECTION_TITLE_FIELD_MAP,
   'Report tab title':                               'reportTabTitle',
   'KPI - ad clicks (value)':                       'kpi_clicks',
   'KPI - ad clicks (trend)':                       'kpi_clicks_trend',
@@ -2990,6 +3025,7 @@ const IG_CONFIG_FIELD_MAP = {
   'Final thoughts label':                          'notes_final_label',
 };
 const IG_VALUE_FIELDS = new Set([
+  ...SECTION_TITLE_FIELDS,
   'reportTabTitle','kpi_tlbl',
   'content1_label','content2_label','content3_label','content_metric_labels',
   'notes_performance_label','notes_audience_label','notes_final_label',
@@ -3004,6 +3040,7 @@ const IG_MAPPING_FIELDS = new Set([
 
 // ── DISPLAY ADS CONFIG FIELD MAP (_config_display-ads tab) ──
 const DISP_CONFIG_FIELD_MAP = {
+  ...SECTION_TITLE_FIELD_MAP,
   'Report tab title':                               'reportTabTitle',
   'KPI - ad clicks (value)':                       'kpi_clicks',
   'KPI - ad clicks (trend)':                       'kpi_clicks_trend',
@@ -3036,6 +3073,7 @@ const DISP_CONFIG_FIELD_MAP = {
   'Final thoughts label':                          'notes_final_label',
 };
 const DISP_VALUE_FIELDS = new Set([
+  ...SECTION_TITLE_FIELDS,
   'reportTabTitle','kpi_tlbl',
   'content1_label','content2_label','content3_label','content_metric_labels',
   'notes_performance_label','notes_audience_label','notes_final_label',
@@ -3051,6 +3089,7 @@ const DISP_MAPPING_FIELDS = new Set([
 
 // ── YOUTUBE ADS CONFIG FIELD MAP (_config_youtubeads tab) ──
 const YT_CONFIG_FIELD_MAP = {
+  ...SECTION_TITLE_FIELD_MAP,
   'Report tab title':                               'reportTabTitle',
   'KPI - ad clicks (value)':                       'kpi_clicks',
   'KPI - ad clicks (trend)':                       'kpi_clicks_trend',
@@ -3083,6 +3122,7 @@ const YT_CONFIG_FIELD_MAP = {
   'Final thoughts label':                          'notes_final_label',
 };
 const YT_VALUE_FIELDS = new Set([
+  ...SECTION_TITLE_FIELDS,
   'reportTabTitle','kpi_tlbl',
   'content1_label','content2_label','content3_label','content_metric_labels',
   'notes_performance_label','notes_audience_label','notes_final_label',
@@ -3098,6 +3138,7 @@ const YT_MAPPING_FIELDS = new Set([
 
 // ── LINKEDIN CONFIG FIELD MAP (_config_linkedin tab) ──
 const LI_CONFIG_FIELD_MAP = {
+  ...SECTION_TITLE_FIELD_MAP,
   'Report tab title':                               'reportTabTitle',
   'KPI - ad clicks (value)':                       'kpi_clicks',
   'KPI - ad clicks (trend)':                       'kpi_clicks_trend',
@@ -3125,6 +3166,7 @@ const LI_CONFIG_FIELD_MAP = {
   'Final thoughts label':                          'notes_final_label',
 };
 const LI_VALUE_FIELDS = new Set([
+  ...SECTION_TITLE_FIELDS,
   'reportTabTitle','kpi_tlbl',
   'content1_label','content2_label','content3_label','content_metric_labels',
   'notes_performance_label','notes_audience_label','notes_final_label',
@@ -3136,6 +3178,7 @@ const LI_MAPPING_FIELDS = new Set([
   'audience_range','content1_range','content2_range','content3_range',
 ]);
 const OVERVIEW_CONFIG_FIELD_MAP = {
+  ...SECTION_TITLE_FIELD_MAP,
   'Report tab title':          'reportTabTitle',
   'KPI 1 - title':             'kpi1_title',
   'KPI 1 - value':             'kpi1_value',
@@ -3160,6 +3203,7 @@ const OVERVIEW_CONFIG_FIELD_MAP = {
   'Executive summary label':   'exec_label',
 };
 const OVERVIEW_VALUE_FIELDS = new Set([
+  ...SECTION_TITLE_FIELDS,
   'reportTabTitle',
   'kpi1_title','kpi1_tlbl','kpi1_dir',
   'kpi2_title','kpi2_tlbl','kpi2_dir',
@@ -3629,6 +3673,8 @@ async function bootClientWithLoad(client) {
     [...CONFIG_VALUE_FIELDS, ...CONFIG_MAPPING_FIELDS].forEach(f => {
       if (gsCfg[f] !== undefined) client[f] = gsCfg[f];
     });
+    // Title overrides always overwritten so a cleared row can't leave a stale title behind
+    SECTION_TITLE_FIELDS.forEach(f => { client[f] = gsCfg[f]; });
     // Update tab title in registry label if set
     if (gsCfg.reportTabTitle) {
       const gsReport = reports.find(r => r.type === 'google-search');
@@ -3926,6 +3972,7 @@ async function fetchInstagramDataAsync(client, igCfg) {
 }
 
 function applyFacebookData(config, rangeIndex) {
+  applySectionTitles('tmpl-facebook-ads', config);
   var val = function(fieldId) {
     var range = config[fieldId];
     if (!range) return null;
@@ -4015,6 +4062,7 @@ function applyFacebookData(config, rangeIndex) {
 }
 
 function applyInstagramData(config, rangeIndex) {
+  applySectionTitles('tmpl-instagram-ads', config);
   var val = function(fieldId) {
     var range = config[fieldId];
     if (!range) return null;
@@ -4135,6 +4183,7 @@ async function fetchDisplayDataAsync(client, dispCfg) {
 }
 
 function applyDisplayData(config, rangeIndex) {
+  applySectionTitles('tmpl-display-ads', config);
   function val(fieldId) {
     const range = config[fieldId];
     if (!range) return null;
@@ -4275,6 +4324,7 @@ async function fetchYouTubeDataAsync(client, ytCfg) {
 }
 
 function applyYouTubeData(config, rangeIndex) {
+  applySectionTitles('tmpl-youtube-ads', config);
   function val(fieldId) {
     const range = config[fieldId];
     if (!range) return null;
@@ -4418,6 +4468,7 @@ async function fetchLinkedInDataAsync(client, liCfg) {
 }
 
 function applyLinkedInData(config, rangeIndex) {
+  applySectionTitles('tmpl-linkedin-ads', config);
   const val = (fieldId) => {
     const range = config[fieldId];
     if (!range) return null;
@@ -4530,6 +4581,7 @@ async function fetchOverviewDataAsync(client, ovCfg) {
 }
 
 function applyOverviewData(client, cfg, rangeIndex) {
+  applySectionTitles('tmpl-overview', cfg);
   // Helper: resolve a single-cell mapping field
   function val(fieldId) {
     const range = cfg[fieldId];
@@ -4618,6 +4670,9 @@ function applyOverviewData(client, cfg, rangeIndex) {
 
 function resetClientUI() {
   // ── RESET ALL STALE STATE FROM PREVIOUS CLIENT ──
+
+  // Section/KPI title overrides back to HTML defaults
+  resetSectionTitles();
 
   // Reset Google Search KPIs
   ['kpi-clicks','kpi-impressions','kpi-ctr','kpi-cpc'].forEach(id => {
@@ -5161,6 +5216,8 @@ function switchTemplate(type, reports) {
 }
 
 function applySheetData(mapping, rangeIndex) {
+  // Title overrides — GS value fields live on currentClient (same source as notes labels)
+  applySectionTitles('tmpl-google-search', currentClient);
   function val(fieldId) {
     const range = mapping[fieldId];
     if (!range) return null;
@@ -5407,6 +5464,30 @@ function applyNotesSection(sectionId, titleId, label) {
     const titleEl = document.getElementById(titleId);
     if (titleEl) titleEl.textContent = label;
   }
+}
+
+// ── SECTION TITLE OVERRIDES (v2.18.0) ──
+// Every element with data-title-key="<field>" is overridable from the template's config tab
+// (see SECTION_TITLE_FIELD_MAP). The HTML text is the default; it's captured once into
+// data-title-default the first time the element is touched. Each call first restores the
+// default, then applies the override — so a renamed title never carries over to the next
+// client or survives a refresh after its config row is cleared. Titles only: this never
+// shows or hides anything (that stays with the data-gating / applyNotesSection logic).
+function applySectionTitles(rootId, cfg) {
+  const root = document.getElementById(rootId);
+  if (!root) return;
+  root.querySelectorAll('[data-title-key]').forEach(el => {
+    if (el.dataset.titleDefault === undefined) el.dataset.titleDefault = el.textContent;
+    const override = cfg ? String(cfg[el.dataset.titleKey] ?? '').trim() : '';
+    el.textContent = override || el.dataset.titleDefault;
+  });
+}
+
+// Restore every overridable title in the app to its default (called from resetClientUI)
+function resetSectionTitles() {
+  document.querySelectorAll('[data-title-key]').forEach(el => {
+    if (el.dataset.titleDefault !== undefined) el.textContent = el.dataset.titleDefault;
+  });
 }
 
 function parseDemo(rows) {
@@ -5729,6 +5810,7 @@ async function loadMetaTemplate() {
 }
 
 function applyMetaData(config, rangeIndex) {
+  applySectionTitles('tmpl-meta-ads', config);
   const val = (fieldId) => {
     const range = config[fieldId];
     if (!range) return null;
@@ -6789,6 +6871,9 @@ document.getElementById('refresh-btn').addEventListener('click', async () => {
     const ovCfg   = configs.find(c => c && c._reportType === 'overview');
 
     if (gsCfg)   { [...CONFIG_VALUE_FIELDS, ...CONFIG_MAPPING_FIELDS].forEach(f => { if (gsCfg[f] !== undefined) currentClient[f] = gsCfg[f]; }); }
+    // Title overrides are always overwritten (even with undefined) so a cleared config row
+    // reverts to the default on refresh instead of keeping the previous title
+    if (gsCfg)   { SECTION_TITLE_FIELDS.forEach(f => { currentClient[f] = gsCfg[f]; }); }
     if (metaCfg) { currentClient._metaConfig = metaCfg; currentClient._metaLoaded = false; }
     if (fbCfg)   { currentClient._fbConfig = fbCfg; currentClient._fbLoaded = false; }
     if (igCfg)   { currentClient._igConfig = igCfg; currentClient._igLoaded = false; }
