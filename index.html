@@ -300,6 +300,7 @@ body::before{
 #tmpl-display-ads .kpi-grid-3{grid-template-columns:repeat(3,1fr)}
 #tmpl-youtube-ads .kpi-grid-3{grid-template-columns:repeat(3,1fr)}
 #tmpl-spatial-ads .kpi-grid-3{grid-template-columns:repeat(3,1fr)}
+#tmpl-traditional-ads .kpi-grid-3{grid-template-columns:repeat(3,1fr)}
 #tmpl-linkedin-ads .kpi-grid-3{grid-template-columns:repeat(3,1fr)}
 .kpi{
   padding:26px 28px 22px;position:relative;overflow:hidden;
@@ -923,7 +924,53 @@ body::before{
 
 
 
-/* ── SPATIAL ADS: MEDIA TYPE RIBBON ── */
+/* ── PIN MAP (Spatial, Traditional Ads) ── */
+.pin-card{padding:20px}
+.pin-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.pin-header .ctitle{margin-bottom:0}
+.pin-toggle{flex-wrap:wrap;max-width:100%}
+.pin-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:14px;height:560px}
+.pin-map-body{min-width:0;min-height:0;border-radius:9px;overflow:hidden;border:1px solid rgba(0,0,0,0.08);position:relative}
+.pin-panel{display:flex;flex-direction:column;min-width:0;min-height:0}
+.pin-panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.pin-count{flex:1;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#6e324c;text-align:center}
+.pin-arrow{flex:none;width:36px;height:34px;border:none;border-radius:9px;background:rgba(0,0,0,0.05);color:var(--text);font-size:18px;font-weight:700;line-height:1;cursor:pointer;font-family:var(--font-primary);transition:background .15s,color .15s}
+.pin-arrow:hover{background:var(--red);color:#fff}
+.pin-all{border:none;background:none;font-family:var(--font-primary);font-size:11px;font-weight:700;color:var(--red);cursor:pointer;padding:0 2px;height:24px;margin-bottom:6px;visibility:hidden}
+.pin-all.show{visibility:visible}
+.pin-track{flex:1;min-height:0;display:flex;flex-direction:column;gap:8px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(232,56,45,0.3) transparent}
+.pin-item{flex:none;display:block;width:100%;text-align:left;border:none;background:rgba(0,0,0,0.03);border-radius:9px;padding:12px 14px;cursor:pointer;font-family:var(--font-primary);transition:background .18s,box-shadow .18s}
+.pin-item:hover{background:rgba(0,0,0,0.06)}
+.pin-item.active{background:rgba(232,56,45,0.07);box-shadow:inset 0 0 0 1px rgba(232,56,45,0.3)}
+.pin-name{display:block;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#6e324c;line-height:1.35}
+.pin-stat{display:flex;align-items:baseline;justify-content:space-between;gap:12px;line-height:1.3;margin-top:5px}
+.pin-label{font-size:12px;font-weight:600;color:var(--text-muted)}
+.pin-value{font-size:21px;font-weight:800;letter-spacing:-.4px;color:var(--text);white-space:nowrap}
+.pin-solo{display:block;font-size:17px;font-weight:800;letter-spacing:-.2px;color:var(--text);line-height:1.3;margin-top:5px}
+.pin-popup-name{font-size:13px;font-weight:800;color:var(--text);line-height:1.25}
+.pin-admin{margin-top:12px;font-size:12px;color:var(--text-muted);line-height:1.7}
+.pin-admin summary{cursor:pointer;font-weight:700;color:var(--text)}
+.pin-notice{display:none;margin-top:12px;padding:10px 14px;border-radius:9px;background:rgba(232,56,45,0.07);font-size:12px;font-weight:600;color:#a32a22}
+.pin-notice.show{display:block}
+#app:not(.admin-mode) .pin-admin,#app:not(.admin-mode) .pin-notice{display:none}
+@media(max-width:768px){
+  .pin-card{padding:16px}
+  .pin-layout{grid-template-columns:minmax(0,1fr);height:auto}
+  .pin-map-body{height:400px}
+  .pin-track{flex-direction:row;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+  .pin-track::-webkit-scrollbar{display:none}
+  .pin-item{flex:0 0 240px;width:auto}
+}
+@media(max-width:480px){
+  .pin-map-body{height:340px}
+  .pin-item{flex:0 0 100%}
+}
+
+/* ── TRADITIONAL ADS: CREATIVE REFERENCE ── */
+#trad-content-grid .rank-badge,#trad-content-grid .content-metrics{display:none}
+#trad-content-grid .content-card-title{margin-bottom:0}
+
+/* ── SPATIAL ADS: BREAKDOWN RIBBONS ── */
 .spa-media-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .spa-media-head .ctitle{margin-bottom:0}
 .spa-ribbon-wrap{position:relative;margin-top:20px}
@@ -1009,12 +1056,14 @@ body::before{
   /* KPI grid — 2 columns on tablet */
   .kpi-grid{grid-template-columns:1fr 1fr;gap:10px}
   #ov-kpi-grid{grid-template-columns:1fr 1fr!important}
+  #sales-kpi-grid{grid-template-columns:1fr 1fr!important}
   #tmpl-meta-ads .kpi-grid-3{grid-template-columns:repeat(2,1fr)}
   #tmpl-facebook-ads .kpi-grid-3{grid-template-columns:repeat(2,1fr)}
   #tmpl-instagram-ads .kpi-grid-3{grid-template-columns:repeat(2,1fr)}
   #tmpl-display-ads .kpi-grid-3{grid-template-columns:repeat(2,1fr)}
   #tmpl-youtube-ads .kpi-grid-3{grid-template-columns:repeat(2,1fr)}
   #tmpl-spatial-ads .kpi-grid-3{grid-template-columns:repeat(2,1fr)}
+  #tmpl-traditional-ads .kpi-grid-3{grid-template-columns:repeat(2,1fr)}
   #tmpl-linkedin-ads .kpi-grid-3{grid-template-columns:repeat(2,1fr)}
   .kpi{height:158px;padding:16px 16px 12px;overflow:hidden}
   .kpi-val{font-size:32px}
@@ -1160,8 +1209,8 @@ body::before{
   }
 
   /* Spatial ribbon — 2x2 metric toggle, slimmer ribbon */
-  #spa-media-toggle-bar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
-  #spa-media-toggle-bar .geo-pill-btn{min-height:44px}
+  #spa-media-toggle-bar,#spa-device-toggle-bar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  #spa-media-toggle-bar .geo-pill-btn,#spa-device-toggle-bar .geo-pill-btn{min-height:44px}
   .spa-ribbon-wrap{margin-top:14px}
   .spa-ribbon{height:48px}
   .spa-ribbon-seg{font-size:13px}
@@ -1324,7 +1373,8 @@ body::before{
   }
 
   /* Spatial ribbon — keep colors and four-across cards; hide the metric toggle */
-  #spa-media-toggle-bar,.spa-ribbon-tip{display:none!important}
+  #spa-media-toggle-bar,#spa-device-toggle-bar,.spa-ribbon-tip{display:none!important}
+  #spa-pin-section,#trad-pin-section{display:none!important}
   .spa-ribbon-seg,.spa-media-dot{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .spa-media-grid{grid-template-columns:repeat(var(--spa-cols,4),minmax(0,1fr))!important}
 
@@ -2456,21 +2506,46 @@ body::before{
       </div>
     </div>
 
-    <!-- SPATIAL ADS MEDIA TYPE RIBBON (conditional) -->
+    <!-- SPATIAL ADS PIN MAP (conditional) -->
+    <div id="spa-pin-section" style="display:none">
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="location_map_title">Mapped Target Locations</h2><div class="sh-line"></div></div>
+      <div class="glass pin-card">
+        <div class="pin-header" id="spa-pin-header" style="display:none">
+          <div class="ctitle" id="spa-pin-title"></div>
+          <div class="geo-pill-toggle pin-toggle" id="spa-pin-toggle" role="group" aria-label="Filter by category"></div>
+        </div>
+        <div class="pin-layout">
+          <div class="pin-map-body" id="spa-pin-map"></div>
+          <div class="pin-panel">
+            <div class="pin-panel-head">
+              <button class="pin-arrow" type="button" aria-label="Previous location" onclick="stepPin('spa',-1)">&#8249;</button>
+              <span class="pin-count" id="spa-pin-count"></span>
+              <button class="pin-arrow" type="button" aria-label="Next location" onclick="stepPin('spa',1)">&#8250;</button>
+            </div>
+            <button class="pin-all" id="spa-pin-all" type="button" onclick="viewAllPins('spa')"></button>
+            <div class="pin-track" id="spa-pin-track"></div>
+          </div>
+        </div>
+        <div class="pin-notice" id="spa-pin-notice"></div>
+        <details class="pin-admin" id="spa-pin-admin"><summary>Pin check</summary><div id="spa-pin-check"></div></details>
+      </div>
+    </div>
+
+    <!-- SPATIAL ADS AD PLACEMENT RIBBON (conditional) -->
     <div id="spa-media-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="media_title">Ad Performance by Media Type</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="media_title">Ad Placement Breakdown</h2><div class="sh-line"></div></div>
       <div class="glass card card-auto">
         <div class="spa-media-head">
-          <div class="ctitle" data-title-key="media_card_title">Media Type Breakdown</div>
-          <div class="geo-pill-toggle" id="spa-media-toggle-bar" role="group" aria-label="Choose media type metric">
-            <button class="geo-pill-btn active" type="button" data-metric="clicks" aria-pressed="true" onclick="setSpatialMetric('clicks')">Clicks</button>
-            <button class="geo-pill-btn" type="button" data-metric="impressions" aria-pressed="false" onclick="setSpatialMetric('impressions')">Impressions</button>
-            <button class="geo-pill-btn" type="button" data-metric="cpm" aria-pressed="false" onclick="setSpatialMetric('cpm')">CPM</button>
-            <button class="geo-pill-btn" type="button" data-metric="devices" aria-pressed="false" onclick="setSpatialMetric('devices')">Devices Reached</button>
+          <div class="ctitle" data-title-key="media_card_title">Ad Placements</div>
+          <div class="geo-pill-toggle" id="spa-media-toggle-bar" role="group" aria-label="Choose ad placement metric">
+            <button class="geo-pill-btn active" type="button" data-metric="clicks" aria-pressed="true" onclick="setSpatialMetric('media','clicks')">Clicks</button>
+            <button class="geo-pill-btn" type="button" data-metric="impressions" aria-pressed="false" onclick="setSpatialMetric('media','impressions')">Impressions</button>
+            <button class="geo-pill-btn" type="button" data-metric="cpm" aria-pressed="false" onclick="setSpatialMetric('media','cpm')">CPM</button>
+            <button class="geo-pill-btn" type="button" data-metric="devices" aria-pressed="false" onclick="setSpatialMetric('media','devices')">Devices Reached</button>
           </div>
         </div>
         <div class="spa-ribbon-wrap">
-          <div class="spa-ribbon" id="spa-media-ribbon" role="group" aria-label="Media type performance"></div>
+          <div class="spa-ribbon" id="spa-media-ribbon" role="group" aria-label="Ad placement performance"></div>
           <div class="spa-ribbon-tip" id="spa-media-tip" role="status"></div>
         </div>
         <div class="spa-ribbon-note" id="spa-media-note"></div>
@@ -2478,9 +2553,9 @@ body::before{
       </div>
     </div>
 
-    <!-- SPATIAL ADS MEDIA TYPE INSIGHTS (conditional) -->
+    <!-- SPATIAL ADS AD PLACEMENT INSIGHTS (conditional) -->
     <div id="spa-notes-media-section" style="display:none">
-      <div class="sh"><div class="sh-bar"></div><h2 id="spa-notes-media-title">Media Type Insights</h2><div class="sh-line"></div></div>
+      <div class="sh"><div class="sh-bar"></div><h2 id="spa-notes-media-title">Ad Placement Insights</h2><div class="sh-line"></div></div>
       <div class="glass note-card note-section" style="height:188px">
         <button class="note-edit-btn" onclick="enterNoteEdit('spa-notes-media')">Edit</button>
         <div class="note-view" id="spa-notes-media-view"></div>
@@ -2494,6 +2569,48 @@ body::before{
         <div class="note-actions">
           <button class="note-cancel-btn" onclick="cancelNoteEdit('spa-notes-media')">Cancel</button>
           <button class="note-save-btn" onclick="saveNoteEdit('spa-notes-media')">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPATIAL ADS DEVICE RIBBON (conditional) -->
+    <div id="spa-device-section" style="display:none">
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="device_title">Device Breakdown</h2><div class="sh-line"></div></div>
+      <div class="glass card card-auto">
+        <div class="spa-media-head">
+          <div class="ctitle" data-title-key="device_card_title">Device Breakdown</div>
+          <div class="geo-pill-toggle" id="spa-device-toggle-bar" role="group" aria-label="Choose device metric">
+            <button class="geo-pill-btn active" type="button" data-metric="clicks" aria-pressed="true" onclick="setSpatialMetric('device','clicks')">Clicks</button>
+            <button class="geo-pill-btn" type="button" data-metric="impressions" aria-pressed="false" onclick="setSpatialMetric('device','impressions')">Impressions</button>
+            <button class="geo-pill-btn" type="button" data-metric="cpm" aria-pressed="false" onclick="setSpatialMetric('device','cpm')">CPM</button>
+            <button class="geo-pill-btn" type="button" data-metric="devices" aria-pressed="false" onclick="setSpatialMetric('device','devices')">Devices Reached</button>
+          </div>
+        </div>
+        <div class="spa-ribbon-wrap">
+          <div class="spa-ribbon" id="spa-device-ribbon" role="group" aria-label="Device performance"></div>
+          <div class="spa-ribbon-tip" id="spa-device-tip" role="status"></div>
+        </div>
+        <div class="spa-ribbon-note" id="spa-device-note"></div>
+        <div class="spa-media-grid fade-target" id="spa-device-grid"></div>
+      </div>
+    </div>
+
+    <!-- SPATIAL ADS DEVICE INSIGHTS (conditional) -->
+    <div id="spa-notes-device-section" style="display:none">
+      <div class="sh"><div class="sh-bar"></div><h2 id="spa-notes-device-title">Device Breakdown Insights</h2><div class="sh-line"></div></div>
+      <div class="glass note-card note-section" style="height:188px">
+        <button class="note-edit-btn" onclick="enterNoteEdit('spa-notes-device')">Edit</button>
+        <div class="note-view" id="spa-notes-device-view"></div>
+        <div class="note-toolbar">
+          <button class="note-toolbar-btn" title="Bold" onclick="noteFormat(this,'bold')"><b>B</b></button>
+          <button class="note-toolbar-btn" title="Italic" onclick="noteFormat(this,'italic')"><i>I</i></button>
+          <button class="note-toolbar-btn" title="Bullet list" onclick="noteFormat(this,'bullet')">&#8226;</button>
+          <button class="note-toolbar-btn" title="Numbered list" onclick="noteFormat(this,'number')">1.</button>
+        </div>
+        <textarea class="note-textarea" id="spa-notes-device" placeholder="Add notes here…"></textarea>
+        <div class="note-actions">
+          <button class="note-cancel-btn" onclick="cancelNoteEdit('spa-notes-device')">Cancel</button>
+          <button class="note-save-btn" onclick="saveNoteEdit('spa-notes-device')">Save</button>
         </div>
       </div>
     </div>
@@ -2525,6 +2642,187 @@ body::before{
     </div>
 
     </div><!-- /tmpl-spatial-ads -->
+
+    <!-- ── TRADITIONAL ADS TEMPLATE ── -->
+    <div class="tmpl-content" id="tmpl-traditional-ads">
+
+    <!-- TRADITIONAL ADS KPIs — 3 across -->
+    <div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="top_line_title">Top-Line Campaign Performance</h2><div class="sh-line"></div></div>
+      <div class="kpi-grid kpi-grid-3" id="trad-kpi-grid">
+        <div class="glass kpi">
+          <div class="kpi-tag" data-title-key="kpi_clicks_title">Ad Clicks</div>
+          <div class="kpi-val" id="trad-kpi-clicks">—</div>
+          <div class="kpi-trend"><span id="trad-kpi-clicks-trend" class="tup" style="display:none"></span><span class="tlbl" id="trad-kpi-clicks-tlbl"></span></div>
+        </div>
+        <div class="glass kpi">
+          <div class="kpi-tag" data-title-key="kpi_impr_title">Impressions</div>
+          <div class="kpi-val" id="trad-kpi-impr">—</div>
+          <div class="kpi-trend"><span id="trad-kpi-impr-trend" class="tup" style="display:none"></span><span class="tlbl" id="trad-kpi-impr-tlbl"></span></div>
+        </div>
+        <div class="glass kpi">
+          <div class="kpi-tag" data-title-key="kpi_ctr_title">Avg. Click-Through Rate (CTR)</div>
+          <div class="kpi-val" id="trad-kpi-ctr">—</div>
+          <div class="kpi-trend"><span id="trad-kpi-ctr-trend" class="tup" style="display:none"></span><span class="tlbl" id="trad-kpi-ctr-tlbl"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRADITIONAL ADS PERFORMANCE NOTES (conditional) -->
+    <div id="trad-notes-performance-section" style="display:none">
+      <div class="sh"><div class="sh-bar"></div><h2 id="trad-notes-performance-title">Performance Notes</h2><div class="sh-line"></div></div>
+      <div class="glass note-card note-section" style="height:188px">
+        <button class="note-edit-btn" onclick="enterNoteEdit('trad-notes-performance')">Edit</button>
+        <div class="note-view" id="trad-notes-performance-view"></div>
+        <div class="note-toolbar">
+          <button class="note-toolbar-btn" title="Bold" onclick="noteFormat(this,'bold')"><b>B</b></button>
+          <button class="note-toolbar-btn" title="Italic" onclick="noteFormat(this,'italic')"><i>I</i></button>
+          <button class="note-toolbar-btn" title="Bullet list" onclick="noteFormat(this,'bullet')">&#8226;</button>
+          <button class="note-toolbar-btn" title="Numbered list" onclick="noteFormat(this,'number')">1.</button>
+        </div>
+        <textarea class="note-textarea" id="trad-notes-performance" placeholder="Add notes here…"></textarea>
+        <div class="note-actions">
+          <button class="note-cancel-btn" onclick="cancelNoteEdit('trad-notes-performance')">Cancel</button>
+          <button class="note-save-btn" onclick="saveNoteEdit('trad-notes-performance')">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRADITIONAL ADS AD PLACEMENT TABLE (conditional) -->
+    <div id="trad-placement-section" style="display:none">
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="placement_title">Ad Placement Breakdown</h2><div class="sh-line"></div></div>
+      <div class="glass card card-auto">
+        <div class="ctitle" data-title-key="placement_table_title">Ad Placements</div>
+        <div class="audience-table-wrap" id="trad-placement-table-wrap">
+          <div class="audience-empty">No ad placement data configured</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRADITIONAL ADS AD PLACEMENT INSIGHTS (conditional) -->
+    <div id="trad-notes-placement-section" style="display:none">
+      <div class="sh"><div class="sh-bar"></div><h2 id="trad-notes-placement-title">Ad Placement Insights</h2><div class="sh-line"></div></div>
+      <div class="glass note-card note-section" style="height:188px">
+        <button class="note-edit-btn" onclick="enterNoteEdit('trad-notes-placement')">Edit</button>
+        <div class="note-view" id="trad-notes-placement-view"></div>
+        <div class="note-toolbar">
+          <button class="note-toolbar-btn" title="Bold" onclick="noteFormat(this,'bold')"><b>B</b></button>
+          <button class="note-toolbar-btn" title="Italic" onclick="noteFormat(this,'italic')"><i>I</i></button>
+          <button class="note-toolbar-btn" title="Bullet list" onclick="noteFormat(this,'bullet')">&#8226;</button>
+          <button class="note-toolbar-btn" title="Numbered list" onclick="noteFormat(this,'number')">1.</button>
+        </div>
+        <textarea class="note-textarea" id="trad-notes-placement" placeholder="Add notes here…"></textarea>
+        <div class="note-actions">
+          <button class="note-cancel-btn" onclick="cancelNoteEdit('trad-notes-placement')">Cancel</button>
+          <button class="note-save-btn" onclick="saveNoteEdit('trad-notes-placement')">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRADITIONAL ADS PIN MAP (conditional) -->
+    <div id="trad-pin-section" style="display:none">
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="location_map_title">Mapped Ad Placements</h2><div class="sh-line"></div></div>
+      <div class="glass pin-card">
+        <div class="pin-header" id="trad-pin-header" style="display:none">
+          <div class="ctitle" id="trad-pin-title"></div>
+          <div class="geo-pill-toggle pin-toggle" id="trad-pin-toggle" role="group" aria-label="Filter by category"></div>
+        </div>
+        <div class="pin-layout">
+          <div class="pin-map-body" id="trad-pin-map"></div>
+          <div class="pin-panel">
+            <div class="pin-panel-head">
+              <button class="pin-arrow" type="button" aria-label="Previous location" onclick="stepPin('trad',-1)">&#8249;</button>
+              <span class="pin-count" id="trad-pin-count"></span>
+              <button class="pin-arrow" type="button" aria-label="Next location" onclick="stepPin('trad',1)">&#8250;</button>
+            </div>
+            <button class="pin-all" id="trad-pin-all" type="button" onclick="viewAllPins('trad')"></button>
+            <div class="pin-track" id="trad-pin-track"></div>
+          </div>
+        </div>
+        <div class="pin-notice" id="trad-pin-notice"></div>
+        <details class="pin-admin" id="trad-pin-admin"><summary>Pin check</summary><div id="trad-pin-check"></div></details>
+      </div>
+    </div>
+
+    <!-- TRADITIONAL ADS CREATIVE REFERENCE (conditional) -->
+    <div id="trad-content-section" style="display:none">
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="creative_ref_title">Campaign Creative Reference</h2><div class="sh-line"></div></div>
+      <div class="content-grid" id="trad-content-grid"></div>
+    </div>
+
+    <!-- TRADITIONAL ADS FINAL THOUGHTS (conditional) -->
+    <div id="trad-notes-final-section" style="display:none">
+      <div class="sh"><div class="sh-bar"></div><h2 id="trad-notes-final-title">Final Thoughts</h2><div class="sh-line"></div></div>
+      <div class="glass note-card note-section" style="height:255px">
+        <button class="note-edit-btn" onclick="enterNoteEdit('trad-notes-final')">Edit</button>
+        <div class="note-view" id="trad-notes-final-view"></div>
+        <div class="note-toolbar">
+          <button class="note-toolbar-btn" title="Bold" onclick="noteFormat(this,'bold')"><b>B</b></button>
+          <button class="note-toolbar-btn" title="Italic" onclick="noteFormat(this,'italic')"><i>I</i></button>
+          <button class="note-toolbar-btn" title="Bullet list" onclick="noteFormat(this,'bullet')">&#8226;</button>
+          <button class="note-toolbar-btn" title="Numbered list" onclick="noteFormat(this,'number')">1.</button>
+        </div>
+        <textarea class="note-textarea" id="trad-notes-final" placeholder="Add notes here…"></textarea>
+        <div class="note-actions">
+          <button class="note-cancel-btn" onclick="cancelNoteEdit('trad-notes-final')">Cancel</button>
+          <button class="note-save-btn" onclick="saveNoteEdit('trad-notes-final')">Save</button>
+        </div>
+      </div>
+    </div>
+
+    </div><!-- /tmpl-traditional-ads -->
+
+    <!-- ── SALES TEMPLATE ── -->
+    <div class="tmpl-content" id="tmpl-sales">
+
+    <!-- SALES FUNNEL KPIs -->
+    <div>
+      <div class="sh"><div class="sh-bar"></div><h2 data-title-key="sales_funnel_title">Sales Funnel</h2><div class="sh-line"></div></div>
+      <div class="kpi-grid" id="sales-kpi-grid">
+        <div class="glass kpi" id="sales-kpi-box-1">
+          <div class="kpi-tag" id="sales-kpi-1-tag">Prospects</div>
+          <div class="kpi-val" id="sales-kpi-1-val">—</div>
+          <div class="kpi-trend"><span id="sales-kpi-1-trend" style="display:none"></span><span class="tlbl" id="sales-kpi-1-tlbl"></span></div>
+        </div>
+        <div class="glass kpi" id="sales-kpi-box-2">
+          <div class="kpi-tag" id="sales-kpi-2-tag">Opportunities</div>
+          <div class="kpi-val" id="sales-kpi-2-val">—</div>
+          <div class="kpi-trend"><span id="sales-kpi-2-trend" style="display:none"></span><span class="tlbl" id="sales-kpi-2-tlbl"></span></div>
+        </div>
+        <div class="glass kpi" id="sales-kpi-box-3">
+          <div class="kpi-tag" id="sales-kpi-3-tag">Proposals</div>
+          <div class="kpi-val" id="sales-kpi-3-val">—</div>
+          <div class="kpi-trend"><span id="sales-kpi-3-trend" style="display:none"></span><span class="tlbl" id="sales-kpi-3-tlbl"></span></div>
+        </div>
+        <div class="glass kpi" id="sales-kpi-box-4">
+          <div class="kpi-tag" id="sales-kpi-4-tag">Contracts</div>
+          <div class="kpi-val" id="sales-kpi-4-val">—</div>
+          <div class="kpi-trend"><span id="sales-kpi-4-trend" style="display:none"></span><span class="tlbl" id="sales-kpi-4-tlbl"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SALES INSIGHTS NOTE (conditional) -->
+    <div id="sales-notes-insights-section" style="display:none">
+      <div class="sh"><div class="sh-bar"></div><h2 id="sales-notes-insights-title">Sales Insights</h2><div class="sh-line"></div></div>
+      <div class="glass note-card note-section" style="height:255px">
+        <button class="note-edit-btn" onclick="enterNoteEdit('sales-notes-insights')">Edit</button>
+        <div class="note-view" id="sales-notes-insights-view"></div>
+        <div class="note-toolbar">
+          <button class="note-toolbar-btn" title="Bold" onclick="noteFormat(this,'bold')"><b>B</b></button>
+          <button class="note-toolbar-btn" title="Italic" onclick="noteFormat(this,'italic')"><i>I</i></button>
+          <button class="note-toolbar-btn" title="Bullet list" onclick="noteFormat(this,'bullet')">&#8226;</button>
+          <button class="note-toolbar-btn" title="Numbered list" onclick="noteFormat(this,'number')">1.</button>
+        </div>
+        <textarea class="note-textarea" id="sales-notes-insights" placeholder="Add notes here…"></textarea>
+        <div class="note-actions">
+          <button class="note-cancel-btn" onclick="cancelNoteEdit('sales-notes-insights')">Cancel</button>
+          <button class="note-save-btn" onclick="saveNoteEdit('sales-notes-insights')">Save</button>
+        </div>
+      </div>
+    </div>
+
+    </div><!-- /tmpl-sales -->
 
     <!-- ── LINKEDIN ADS TEMPLATE ── -->
     <div class="tmpl-content" id="tmpl-linkedin-ads">
@@ -2818,7 +3116,7 @@ const FIELD_DEFS = [
 ];
 
 // ── VERSION ──
-const APP_VERSION = '2.19.0';
+const APP_VERSION = '2.21.0';
 
 // ── STATE ──
 let currentClient = null;
@@ -2847,7 +3145,12 @@ const NOTE_KEYS = {
   'spa-notes-performance': 'spa_performance',
   'spa-notes-audience':    'spa_audience',
   'spa-notes-media':       'spa_media',
+  'spa-notes-device':      'spa_device',
   'spa-notes-final':       'spa_final',
+  'trad-notes-performance': 'trad_performance',
+  'trad-notes-placement':   'trad_placement',
+  'trad-notes-final':       'trad_final',
+  'sales-notes-insights':   'sales_insights',
   'li-notes-performance':  'li_performance',
   'li-notes-audience':     'li_audience',
   'li-notes-final':        'li_final',
@@ -2921,8 +3224,8 @@ function restoreCreatives(clientId, fsCreatives) {
   if (!fsCreatives) return;
   const base = 'link_v2_creative_';
   // Firestore is the source of truth: clear every known slot, then write its values
-  ['meta','fb','ig','disp','yt','spa'].forEach(prefix => {
-    [1,2,3].forEach(s => localStorage.removeItem(base + prefix + '_' + clientId + '_' + s));
+  ['meta','fb','ig','disp','yt','spa','trad'].forEach(prefix => {
+    (prefix === 'trad' ? TRAD_CREATIVE_SLOTS : [1,2,3]).forEach(s => localStorage.removeItem(base + prefix + '_' + clientId + '_' + s));
   });
   [1,2,3].forEach(s => {
     localStorage.removeItem(base + clientId + '_' + s);
@@ -3117,6 +3420,13 @@ const SECTION_TITLE_FIELD_MAP = {
   'KPI - CPM (title)':                             'kpi_cpm_title',
   'Media type title':                              'media_title',
   'Media type card title':                         'media_card_title',
+  'Location map title':                            'location_map_title',
+  'Sales funnel title':                            'sales_funnel_title',
+  'Ad placement breakdown title':                  'placement_title',
+  'Ad placement table title':                      'placement_table_title',
+  'Creative reference title':                      'creative_ref_title',
+  'Device breakdown title':                        'device_title',
+  'Device breakdown card title':                   'device_card_title',
   // Trend direction overrides (v2.19.0) share this map so each is defined once, reaches
   // every template config, and clears on Refresh the same way titles do.
   'KPI - ad clicks (trend direction)':             'kpi_clicks_dir',
@@ -3419,6 +3729,8 @@ const SPA_CONFIG_FIELD_MAP = {
   'KPI - trend label (all)':                       'kpi_tlbl',
   'Audience segmentation range':                   'audience_range',
   'Media type range':                              'media_range',
+  'Device breakdown range':                        'device_range',
+  'Location map range':                            'location_range',
   'Top content 1 label':                           'content1_label',
   'Top content 2 label':                           'content2_label',
   'Top content 3 label':                           'content3_label',
@@ -3429,19 +3741,98 @@ const SPA_CONFIG_FIELD_MAP = {
   'Performance notes label':                       'notes_performance_label',
   'Audience insights label':                       'notes_audience_label',
   'Media type insights label':                     'notes_media_label',
+  'Device insights label':                         'notes_device_label',
   'Final thoughts label':                          'notes_final_label',
 };
 const SPA_VALUE_FIELDS = new Set([
   ...SECTION_TITLE_FIELDS,
   'reportTabTitle','kpi_tlbl',
   'content1_label','content2_label','content3_label','content_metric_labels',
-  'notes_performance_label','notes_audience_label','notes_media_label','notes_final_label',
+  'notes_performance_label','notes_audience_label','notes_media_label','notes_device_label','notes_final_label',
 ]);
 const SPA_MAPPING_FIELDS = new Set([
   'kpi_clicks','kpi_clicks_trend','kpi_reach','kpi_reach_trend',
   'kpi_impr','kpi_impr_trend','kpi_ctr','kpi_ctr_trend',
   'kpi_cpm','kpi_cpm_trend','kpi_freq','kpi_freq_trend',
-  'audience_range','media_range','content1_range','content2_range','content3_range',
+  'audience_range','media_range','device_range','location_range','content1_range','content2_range','content3_range',
+]);
+
+// ── TRADITIONAL ADS CONFIG FIELD MAP (_config_traditional tab) ──
+const TRAD_CREATIVE_SLOTS = [1,2,3,4,5,6];
+const TRAD_CONFIG_FIELD_MAP = {
+  ...SECTION_TITLE_FIELD_MAP,
+  'Report tab title':                              'reportTabTitle',
+  'KPI - ad clicks (value)':                       'kpi_clicks',
+  'KPI - ad clicks (trend)':                       'kpi_clicks_trend',
+  'KPI - impressions (value)':                     'kpi_impr',
+  'KPI - impressions (trend)':                     'kpi_impr_trend',
+  'KPI - CTR (value)':                             'kpi_ctr',
+  'KPI - CTR (trend)':                             'kpi_ctr_trend',
+  'KPI - trend label (all)':                       'kpi_tlbl',
+  'Ad placement range':                            'placement_range',
+  'Location map range':                            'location_range',
+  'Creative reference 1 title':                    'creative1_title',
+  'Creative reference 2 title':                    'creative2_title',
+  'Creative reference 3 title':                    'creative3_title',
+  'Creative reference 4 title':                    'creative4_title',
+  'Creative reference 5 title':                    'creative5_title',
+  'Creative reference 6 title':                    'creative6_title',
+  'Performance notes label':                       'notes_performance_label',
+  'Ad placement insights label':                   'notes_placement_label',
+  'Final thoughts label':                          'notes_final_label',
+};
+const TRAD_VALUE_FIELDS = new Set([
+  ...SECTION_TITLE_FIELDS,
+  'reportTabTitle','kpi_tlbl',
+  ...TRAD_CREATIVE_SLOTS.map(s => 'creative' + s + '_title'),
+  'notes_performance_label','notes_placement_label','notes_final_label',
+]);
+const TRAD_MAPPING_FIELDS = new Set([
+  'kpi_clicks','kpi_clicks_trend','kpi_impr','kpi_impr_trend','kpi_ctr','kpi_ctr_trend',
+  'placement_range','location_range',
+]);
+
+// ── SALES CONFIG FIELD MAP (_config_sales tab) ──
+const SALES_KPI_DEFAULTS = { 1: 'Prospects', 2: 'Opportunities', 3: 'Proposals', 4: 'Contracts' };
+const SALES_CONFIG_FIELD_MAP = {
+  ...SECTION_TITLE_FIELD_MAP,
+  'Report tab title':          'reportTabTitle',
+  'KPI 1 - title':             'kpi1_title',
+  'KPI 1 - value':             'kpi1_value',
+  'KPI 1 - trend value':       'kpi1_trend',
+  'KPI 1 - trend label':       'kpi1_tlbl',
+  'KPI 1 - trend direction':   'kpi1_dir',
+  'KPI 2 - title':             'kpi2_title',
+  'KPI 2 - value':             'kpi2_value',
+  'KPI 2 - trend value':       'kpi2_trend',
+  'KPI 2 - trend label':       'kpi2_tlbl',
+  'KPI 2 - trend direction':   'kpi2_dir',
+  'KPI 3 - title':             'kpi3_title',
+  'KPI 3 - value':             'kpi3_value',
+  'KPI 3 - trend value':       'kpi3_trend',
+  'KPI 3 - trend label':       'kpi3_tlbl',
+  'KPI 3 - trend direction':   'kpi3_dir',
+  'KPI 4 - title':             'kpi4_title',
+  'KPI 4 - value':             'kpi4_value',
+  'KPI 4 - trend value':       'kpi4_trend',
+  'KPI 4 - trend label':       'kpi4_tlbl',
+  'KPI 4 - trend direction':   'kpi4_dir',
+  'Sales insights label':      'notes_insights_label',
+};
+const SALES_VALUE_FIELDS = new Set([
+  ...SECTION_TITLE_FIELDS,
+  'reportTabTitle',
+  'kpi1_title','kpi1_tlbl','kpi1_dir',
+  'kpi2_title','kpi2_tlbl','kpi2_dir',
+  'kpi3_title','kpi3_tlbl','kpi3_dir',
+  'kpi4_title','kpi4_tlbl','kpi4_dir',
+  'notes_insights_label',
+]);
+const SALES_MAPPING_FIELDS = new Set([
+  'kpi1_value','kpi1_trend',
+  'kpi2_value','kpi2_trend',
+  'kpi3_value','kpi3_trend',
+  'kpi4_value','kpi4_trend',
 ]);
 
 // ── LINKEDIN CONFIG FIELD MAP (_config_linkedin tab) ──
@@ -3770,12 +4161,19 @@ async function fetchClientConfig(sheetId, configTab, fieldMap, valueFields, mapp
   // Separate into: fields to resolve now vs fields to keep as range references
   const toResolve = {};   // field → range (will be fetched)
   const config = { sheetId };
+  const seenLabels = new Set();
 
   rows.forEach(row => {
     const label = (row[0] || '').trim();
     const ref   = (row[1] || '').trim();
     const field = fieldMap[label];
     if (!field || !isValidRef(ref)) return;
+
+    // The last populated row wins, so a repeated label can silently change the report
+    if (seenLabels.has(label)) {
+      console.warn(`[Config] Duplicate label "${label}" in ${configTab} — the last populated row is used`);
+    }
+    seenLabels.add(label);
 
     if (mappingFields.has(field)) {
       config[field] = ref;
@@ -3801,6 +4199,9 @@ async function fetchClientConfig(sheetId, configTab, fieldMap, valueFields, mapp
       const value = rangeValues[ref] || rangeValues[cellOnly] || '';
       if (value && !['n/a','na','none','-'].includes(value.toLowerCase())) {
         config[field] = value;
+      } else if (value) {
+        // Keep n/a distinct from blank for fields that treat them differently (Sales KPI titles)
+        (config._naFields = config._naFields || []).push(field);
       }
     });
   }
@@ -3957,6 +4358,16 @@ async function bootClientWithLoad(client) {
           YT_CONFIG_FIELD_MAP, YT_VALUE_FIELDS, YT_MAPPING_FIELDS);
         return { ...cfg, _reportType: 'youtube-ads' };
       }
+      if (r.type === 'sales') {
+        const cfg = await fetchClientConfig(client.sheetId, r.configTab,
+          SALES_CONFIG_FIELD_MAP, SALES_VALUE_FIELDS, SALES_MAPPING_FIELDS);
+        return { ...cfg, _reportType: 'sales' };
+      }
+      if (r.type === 'traditional-ads') {
+        const cfg = await fetchClientConfig(client.sheetId, r.configTab,
+          TRAD_CONFIG_FIELD_MAP, TRAD_VALUE_FIELDS, TRAD_MAPPING_FIELDS);
+        return { ...cfg, _reportType: 'traditional-ads' };
+      }
       if (r.type === 'spatial-ads') {
         const cfg = await fetchClientConfig(client.sheetId, r.configTab,
           SPA_CONFIG_FIELD_MAP, SPA_VALUE_FIELDS, SPA_MAPPING_FIELDS);
@@ -4073,6 +4484,28 @@ async function bootClientWithLoad(client) {
     }
   }
 
+  // Store Sales config on client object
+  const salesCfg = configs.find(c => c && c._reportType === 'sales');
+  if (salesCfg) {
+    client._salesConfig = salesCfg;
+    client._salesLoaded = false;
+    if (salesCfg.reportTabTitle) {
+      const salesReport = reports.find(r => r.type === 'sales');
+      if (salesReport) salesReport.label = salesCfg.reportTabTitle;
+    }
+  }
+
+  // Store Traditional Ads config on client object
+  const tradCfg = configs.find(c => c && c._reportType === 'traditional-ads');
+  if (tradCfg) {
+    client._tradConfig = tradCfg;
+    client._tradLoaded = false;
+    if (tradCfg.reportTabTitle) {
+      const tradReport = reports.find(r => r.type === 'traditional-ads');
+      if (tradReport) tradReport.label = tradCfg.reportTabTitle;
+    }
+  }
+
   // Store Spatial Ads config on client object
   const spaCfg = configs.find(c => c && c._reportType === 'spatial-ads');
   if (spaCfg) {
@@ -4123,6 +4556,18 @@ async function bootClientWithLoad(client) {
   const ytCfgBoot = client._ytConfig;
   if (ytCfgBoot) {
     dataPromises.push(fetchYouTubeDataAsync(client, ytCfgBoot));
+  }
+
+  // Sales data (if applicable)
+  const salesCfgBoot = client._salesConfig;
+  if (salesCfgBoot) {
+    dataPromises.push(fetchSalesDataAsync(client, salesCfgBoot));
+  }
+
+  // Traditional Ads data (if applicable)
+  const tradCfgBoot = client._tradConfig;
+  if (tradCfgBoot) {
+    dataPromises.push(fetchTraditionalDataAsync(client, tradCfgBoot));
   }
 
   // Spatial Ads data (if applicable)
@@ -4389,6 +4834,7 @@ function applyFacebookData(config, rangeIndex) {
   applyNotesSection('fb-notes-performance-section', 'fb-notes-performance-title', config.notes_performance_label);
   applyNotesSection('fb-audience-notes-section', 'fb-notes-audience-title', config.notes_audience_label);
   applyNotesSection('fb-notes-final-section', 'fb-notes-final-title', config.notes_final_label);
+  renderActiveDemoDonuts('facebook-ads');
 }
 
 function applyInstagramData(config, rangeIndex) {
@@ -4479,6 +4925,7 @@ function applyInstagramData(config, rangeIndex) {
   applyNotesSection('ig-notes-performance-section', 'ig-notes-performance-title', config.notes_performance_label);
   applyNotesSection('ig-audience-notes-section', 'ig-notes-audience-title', config.notes_audience_label);
   applyNotesSection('ig-notes-final-section', 'ig-notes-final-title', config.notes_final_label);
+  renderActiveDemoDonuts('instagram-ads');
 }
 
 async function fetchDisplayDataAsync(client, dispCfg) {
@@ -4620,6 +5067,7 @@ function applyDisplayData(config, rangeIndex) {
   applyNotesSection('disp-notes-performance-section', 'disp-notes-performance-title', config.notes_performance_label);
   applyNotesSection('disp-audience-notes-section',    'disp-notes-audience-title',    config.notes_audience_label);
   applyNotesSection('disp-notes-final-section',       'disp-notes-final-title',       config.notes_final_label);
+  renderActiveDemoDonuts('display-ads');
 }
 
 async function fetchYouTubeDataAsync(client, ytCfg) {
@@ -4761,6 +5209,7 @@ function applyYouTubeData(config, rangeIndex) {
   applyNotesSection('yt-notes-performance-section', 'yt-notes-performance-title', config.notes_performance_label);
   applyNotesSection('yt-audience-notes-section',    'yt-notes-audience-title',    config.notes_audience_label);
   applyNotesSection('yt-notes-final-section',       'yt-notes-final-title',       config.notes_final_label);
+  renderActiveDemoDonuts('youtube-ads');
 }
 
 async function fetchSpatialDataAsync(client, spaCfg) {
@@ -4844,8 +5293,10 @@ function applySpatialData(config, rangeIndex) {
     audienceSection.style.display = 'none';
   }
 
-  // Media type ribbon
-  renderSpatialMedia(val('media_range'));
+  // Ad placement and device ribbons
+  renderSpatialRibbon('media', val('media_range'));
+  renderSpatialRibbon('device', val('device_range'));
+  setPinData('spa', val('location_range'));
 
   // Top content
   const contentDefs = [
@@ -4872,22 +5323,29 @@ function applySpatialData(config, rangeIndex) {
   applyNotesSection('spa-notes-performance-section', 'spa-notes-performance-title', config.notes_performance_label);
   applyNotesSection('spa-audience-notes-section',    'spa-notes-audience-title',    config.notes_audience_label);
   applyNotesSection('spa-notes-media-section',       'spa-notes-media-title',       config.notes_media_label);
+  applyNotesSection('spa-notes-device-section',      'spa-notes-device-title',      config.notes_device_label);
   applyNotesSection('spa-notes-final-section',       'spa-notes-final-title',       config.notes_final_label);
 }
 
-// ── SPATIAL ADS: MEDIA TYPE RIBBON ──
-// Media type range: one header row, then up to six rows with fixed columns —
+// ── SPATIAL ADS: BREAKDOWN RIBBONS ──
+// Ad Placements and Device Breakdown share this code. Each range has one header
+// row, then up to six rows with fixed columns —
 // 0 name, 1 clicks, 2 impressions, 3 CTR, 4 CPM, 5 devices reached, 6 frequency.
 // Sheet text is displayed as written; parsed numbers only size the ribbon.
-const SPA_MAX_MEDIA_ROWS = 6;
-const SPA_MEDIA_METRICS = {
-  clicks:      { col: 1, share: true,  secondary: 'ctr',  note: 'Segment width shows each media type’s share of clicks.' },
-  impressions: { col: 2, share: true,  secondary: 'ctr',  note: 'Segment width shows each media type’s share of impressions.' },
-  cpm:         { col: 4, share: false, secondary: 'freq', note: 'Segment width compares CPMs. A wider segment means a higher cost.' },
-  devices:     { col: 5, share: true,  secondary: 'freq', note: 'Segment width shows each media type’s share of devices reached across media types.' },
+const SPA_MAX_RIBBON_ROWS = 6;
+const SPA_RIBBON_METRICS = {
+  clicks:      { col: 1, share: true,  secondary: 'ctr',  note: r => `Segment width shows each ${r.noun}’s share of clicks.` },
+  impressions: { col: 2, share: true,  secondary: 'ctr',  note: r => `Segment width shows each ${r.noun}’s share of impressions.` },
+  cpm:         { col: 4, share: false, secondary: 'freq', note: () => 'Segment width compares CPMs. A wider segment means a higher cost.' },
+  devices:     { col: 5, share: true,  secondary: 'freq', note: r => `Segment width shows each ${r.noun}’s share of devices reached across ${r.plural}.` },
 };
-let spaMedia = { rows: [], metric: 'clicks', tips: [], active: null, pinned: false };
-let spaMediaEventsReady = false;
+const SPA_RIBBONS = {
+  media:  { prefix: 'spa-media',  noun: 'ad placement', plural: 'ad placements', ariaLabel: 'Ad placement performance' },
+  device: { prefix: 'spa-device', noun: 'device type',  plural: 'device types',  ariaLabel: 'Device performance' },
+};
+const spaRibbonState = key => ({ key, rows: [], metric: 'clicks', tips: [], active: null, pinned: false });
+const spaRibbons = { media: spaRibbonState('media'), device: spaRibbonState('device') };
+const spaRibbonEventsReady = { media: false, device: false };
 
 function spaCell(row, col) {
   const text = String(row[col] ?? '').trim();
@@ -4899,48 +5357,56 @@ function spaNumber(text) {
   return Number.isFinite(n) ? n : null;
 }
 
-function spaMetricHasData(metricId) {
-  const col = SPA_MEDIA_METRICS[metricId].col;
-  return spaMedia.rows.some(row => spaNumber(spaCell(row, col)) !== null);
+function spaRibbonEl(key, part) {
+  return document.getElementById(SPA_RIBBONS[key].prefix + '-' + part);
 }
 
-function renderSpatialMedia(rows) {
-  const section = document.getElementById('spa-media-section');
-  const hasContent = row => spaCell(row, 0) && [1,2,4,5].some(col => spaCell(row, col));
-  spaMedia.rows = (rows || []).slice(1).filter(hasContent).slice(0, SPA_MAX_MEDIA_ROWS);
+function spaMetricHasData(key, metricId) {
+  const col = SPA_RIBBON_METRICS[metricId].col;
+  return spaRibbons[key].rows.some(row => spaNumber(spaCell(row, col)) !== null);
+}
 
-  const available = Object.keys(SPA_MEDIA_METRICS).filter(spaMetricHasData);
+function renderSpatialRibbon(key, rows) {
+  const state = spaRibbons[key];
+  const section = spaRibbonEl(key, 'section');
+  const hasContent = row => spaCell(row, 0) && [1,2,4,5].some(col => spaCell(row, col));
+  state.rows = (rows || []).slice(1).filter(hasContent).slice(0, SPA_MAX_RIBBON_ROWS);
+
+  const available = Object.keys(SPA_RIBBON_METRICS).filter(id => spaMetricHasData(key, id));
   if (!available.length) {
-    resetSpatialMedia();
+    resetSpatialRibbon(key);
     section.style.display = 'none';
     return;
   }
   section.style.display = '';
-  spaMedia.metric = available[0];
-  initSpatialMediaEvents();
-  clearSpatialTip();
+  state.metric = available[0];
+  initSpatialRibbonEvents(key);
+  clearSpatialTip(key);
 
-  document.querySelectorAll('#spa-media-toggle-bar .geo-pill-btn').forEach(btn => {
+  spaRibbonEl(key, 'toggle-bar').querySelectorAll('.geo-pill-btn').forEach(btn => {
     btn.style.display = available.includes(btn.dataset.metric) ? '' : 'none';
   });
 
-  const ribbon = document.getElementById('spa-media-ribbon');
-  const grid = document.getElementById('spa-media-grid');
-  const count = spaMedia.rows.length;
+  const ribbon = spaRibbonEl(key, 'ribbon');
+  const grid = spaRibbonEl(key, 'grid');
+  const count = state.rows.length;
   grid.style.setProperty('--spa-cols', count >= 5 ? 3 : count);
-  ribbon.innerHTML = spaMedia.rows.map((_, i) => `<div class="spa-ribbon-seg spa-c${i + 1}" data-index="${i}" role="button"></div>`).join('');
-  grid.innerHTML = spaMedia.rows.map((row, i) => `<div class="spa-media-card" data-index="${i}">
+  ribbon.innerHTML = state.rows.map((_, i) => `<div class="spa-ribbon-seg spa-c${i + 1}" data-index="${i}" role="button"></div>`).join('');
+  grid.innerHTML = state.rows.map((row, i) => `<div class="spa-media-card" data-index="${i}">
       <div class="spa-media-name"><span class="spa-media-dot spa-c${i + 1}"></span>${escHtml(spaCell(row, 0))}</div>
       <div class="spa-media-val"></div>
       <div class="spa-media-sub"></div>
     </div>`).join('');
 
-  updateSpatialMedia();
+  updateSpatialRibbon(key);
 }
 
-function updateSpatialMedia() {
-  const metric = SPA_MEDIA_METRICS[spaMedia.metric];
-  const parsed = spaMedia.rows.map(row => {
+function updateSpatialRibbon(key) {
+  const state = spaRibbons[key];
+  if (!state.rows.length) return;
+  const config = SPA_RIBBONS[key];
+  const metric = SPA_RIBBON_METRICS[state.metric];
+  const parsed = state.rows.map(row => {
     const text = spaCell(row, metric.col);
     const value = spaNumber(text);
     return { row, text, value: value === null ? 0 : Math.max(value, 0), hasValue: value !== null };
@@ -4948,18 +5414,18 @@ function updateSpatialMedia() {
   const total = parsed.reduce((sum, p) => sum + p.value, 0);
   const firstVisible = parsed.map(p => p.value > 0).indexOf(true);
   const lastVisible = parsed.map(p => p.value > 0).lastIndexOf(true);
-  clearSpatialTip();
+  clearSpatialTip(key);
 
-  document.querySelectorAll('#spa-media-toggle-bar .geo-pill-btn').forEach(btn => {
-    const isActive = btn.dataset.metric === spaMedia.metric;
+  spaRibbonEl(key, 'toggle-bar').querySelectorAll('.geo-pill-btn').forEach(btn => {
+    const isActive = btn.dataset.metric === state.metric;
     btn.classList.toggle('active', isActive);
     btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
   });
 
-  const segments = document.querySelectorAll('#spa-media-ribbon .spa-ribbon-seg');
-  const cards = document.querySelectorAll('#spa-media-grid .spa-media-card');
+  const segments = spaRibbonEl(key, 'ribbon').querySelectorAll('.spa-ribbon-seg');
+  const cards = spaRibbonEl(key, 'grid').querySelectorAll('.spa-media-card');
   const summary = [];
-  spaMedia.tips = [];
+  state.tips = [];
   parsed.forEach((p, i) => {
     const pct = total > 0 ? p.value / total * 100 : 0;
     const showLabel = pct >= 9;
@@ -4973,7 +5439,7 @@ function updateSpatialMedia() {
     const segValue = !metric.share ? p.text : pct > 0 && pct < 1 ? '<1%' : Math.round(pct) + '%';
     seg.textContent = showLabel ? segValue : '';
     const tip = pct > 0 ? spaCell(p.row, 0) + ': ' + segValue : '';
-    spaMedia.tips.push(tip);
+    state.tips.push(tip);
     seg.tabIndex = pct > 0 ? 0 : -1;
     if (tip) seg.setAttribute('aria-label', tip); else seg.removeAttribute('aria-label');
 
@@ -4986,20 +5452,23 @@ function updateSpatialMedia() {
   });
 
   const excluded = parsed.some(p => !p.hasValue);
-  document.getElementById('spa-media-note').textContent = metric.note + (excluded ? ' N/A types are excluded.' : '');
-  document.getElementById('spa-media-ribbon').setAttribute('aria-label', 'Media type performance: ' + summary.join(', '));
+  spaRibbonEl(key, 'note').textContent = metric.note(config) + (excluded ? ` N/A ${config.plural} are excluded.` : '');
+  spaRibbonEl(key, 'ribbon').setAttribute('aria-label', config.ariaLabel + ': ' + summary.join(', '));
 }
 
-function showSpatialTip(index, pinned) {
-  const text = spaMedia.tips[index];
+function showSpatialTip(key, index, pinned) {
+  const state = spaRibbons[key];
+  const text = state.tips[index];
   if (!text) return;
-  spaMedia.active = index;
-  spaMedia.pinned = !!pinned;
-  const ribbon = document.getElementById('spa-media-ribbon');
-  const tip = document.getElementById('spa-media-tip');
+  state.active = index;
+  state.pinned = !!pinned;
+  const ribbon = spaRibbonEl(key, 'ribbon');
+  const tip = spaRibbonEl(key, 'tip');
   ribbon.classList.add('has-active');
-  document.querySelectorAll('.spa-ribbon-seg, .spa-media-card').forEach(el => {
-    el.classList.toggle('active', Number(el.dataset.index) === index);
+  [ribbon, spaRibbonEl(key, 'grid')].forEach(root => {
+    root.querySelectorAll('.spa-ribbon-seg, .spa-media-card').forEach(el => {
+      el.classList.toggle('active', Number(el.dataset.index) === index);
+    });
   });
   tip.textContent = text;
   tip.classList.add('show');
@@ -5009,26 +5478,32 @@ function showSpatialTip(index, pinned) {
   tip.style.left = Math.min(Math.max(left, 0), maxLeft) + 'px';
 }
 
-function clearSpatialTip() {
-  spaMedia.active = null;
-  spaMedia.pinned = false;
-  const ribbon = document.getElementById('spa-media-ribbon');
-  const tip = document.getElementById('spa-media-tip');
+function clearSpatialTip(key) {
+  const state = spaRibbons[key];
+  state.active = null;
+  state.pinned = false;
+  const ribbon = spaRibbonEl(key, 'ribbon');
+  const grid = spaRibbonEl(key, 'grid');
+  const tip = spaRibbonEl(key, 'tip');
   if (ribbon) ribbon.classList.remove('has-active');
   if (tip) { tip.classList.remove('show'); tip.textContent = ''; }
-  document.querySelectorAll('.spa-ribbon-seg.active, .spa-media-card.active').forEach(el => el.classList.remove('active'));
+  [ribbon, grid].forEach(root => {
+    if (root) root.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
+  });
 }
 
-function toggleSpatialTip(index) {
-  if (spaMedia.active === index && spaMedia.pinned) clearSpatialTip();
-  else showSpatialTip(index, true);
+function toggleSpatialTip(key, index) {
+  const state = spaRibbons[key];
+  if (state.active === index && state.pinned) clearSpatialTip(key);
+  else showSpatialTip(key, index, true);
 }
 
-function initSpatialMediaEvents() {
-  if (spaMediaEventsReady) return;
-  spaMediaEventsReady = true;
-  const ribbon = document.getElementById('spa-media-ribbon');
-  const grid = document.getElementById('spa-media-grid');
+function initSpatialRibbonEvents(key) {
+  if (spaRibbonEventsReady[key]) return;
+  spaRibbonEventsReady[key] = true;
+  const state = () => spaRibbons[key];
+  const ribbon = spaRibbonEl(key, 'ribbon');
+  const grid = spaRibbonEl(key, 'grid');
   const segIndex = e => {
     const seg = e.target.closest('.spa-ribbon-seg');
     return seg ? Number(seg.dataset.index) : null;
@@ -5036,59 +5511,532 @@ function initSpatialMediaEvents() {
 
   ribbon.addEventListener('pointerover', e => {
     const i = segIndex(e);
-    if (e.pointerType === 'mouse' && i !== null && !spaMedia.pinned) showSpatialTip(i, false);
+    if (e.pointerType === 'mouse' && i !== null && !state().pinned) showSpatialTip(key, i, false);
   });
   ribbon.addEventListener('pointerleave', e => {
-    if (e.pointerType === 'mouse' && !spaMedia.pinned) clearSpatialTip();
+    if (e.pointerType === 'mouse' && !state().pinned) clearSpatialTip(key);
   });
   ribbon.addEventListener('click', e => {
     const i = segIndex(e);
-    if (i !== null) toggleSpatialTip(i);
+    if (i !== null) toggleSpatialTip(key, i);
   });
   ribbon.addEventListener('focusin', e => {
     const i = segIndex(e);
-    if (i !== null && e.target.matches(':focus-visible')) showSpatialTip(i, false);
+    if (i !== null && e.target.matches(':focus-visible')) showSpatialTip(key, i, false);
   });
   ribbon.addEventListener('focusout', () => {
-    if (!spaMedia.pinned) clearSpatialTip();
+    if (!state().pinned) clearSpatialTip(key);
   });
   ribbon.addEventListener('keydown', e => {
     const i = segIndex(e);
-    if (e.key === 'Escape') clearSpatialTip();
+    if (e.key === 'Escape') clearSpatialTip(key);
     else if (i !== null && (e.key === 'Enter' || e.key === ' ')) {
       e.preventDefault();
-      toggleSpatialTip(i);
+      toggleSpatialTip(key, i);
     }
   });
   grid.addEventListener('click', e => {
     const card = e.target.closest('.spa-media-card');
-    if (card) toggleSpatialTip(Number(card.dataset.index));
+    if (card) toggleSpatialTip(key, Number(card.dataset.index));
   });
   document.addEventListener('click', e => {
-    if (spaMedia.active !== null && !e.target.closest('#spa-media-ribbon, #spa-media-grid')) clearSpatialTip();
+    if (state().active !== null && !ribbon.contains(e.target) && !grid.contains(e.target)) clearSpatialTip(key);
   });
 }
 
-function setSpatialMetric(metricId) {
-  if (metricId === spaMedia.metric || !SPA_MEDIA_METRICS[metricId]) return;
-  spaMedia.metric = metricId;
-  const grid = document.getElementById('spa-media-grid');
+function setSpatialMetric(key, metricId) {
+  const state = spaRibbons[key];
+  if (metricId === state.metric || !SPA_RIBBON_METRICS[metricId]) return;
+  state.metric = metricId;
+  const grid = spaRibbonEl(key, 'grid');
   grid.classList.add('fading');
   setTimeout(() => {
-    updateSpatialMedia();
+    updateSpatialRibbon(key);
     grid.classList.remove('fading');
   }, 120);
 }
 
-function resetSpatialMedia() {
-  clearSpatialTip();
-  spaMedia = { rows: [], metric: 'clicks', tips: [], active: null, pinned: false };
-  ['spa-media-ribbon','spa-media-grid'].forEach(id => {
-    const el = document.getElementById(id);
+function resetSpatialRibbon(key) {
+  clearSpatialTip(key);
+  spaRibbons[key] = spaRibbonState(key);
+  ['ribbon','grid'].forEach(part => {
+    const el = spaRibbonEl(key, part);
     if (el) el.innerHTML = '';
   });
-  const note = document.getElementById('spa-media-note');
+  const note = spaRibbonEl(key, 'note');
   if (note) note.textContent = '';
+}
+
+function resetSpatialRibbons() {
+  Object.keys(SPA_RIBBONS).forEach(resetSpatialRibbon);
+}
+
+async function fetchTraditionalDataAsync(client, tradCfg) {
+  if (!sheetsApiKey || !client.sheetId) return;
+  const rangesToFetch = [];
+  TRAD_MAPPING_FIELDS.forEach(f => { if (tradCfg[f]) rangesToFetch.push(tradCfg[f]); });
+  if (!rangesToFetch.length) {
+    applyTraditionalData(tradCfg, {});
+    client._tradLoaded = true;
+    return;
+  }
+  try {
+    const uniqueRanges = [...new Set(rangesToFetch)];
+    const rangeIndex = await resilientBatchFetch(client.sheetId, uniqueRanges);
+    client._tradConfig = tradCfg;
+    currentClient._tradConfig = tradCfg;
+    applyTraditionalData(tradCfg, rangeIndex);
+    client._tradLoaded = true;
+    setConnStatus(true, 'Data Connection');
+  } catch(e) {
+    console.error('[Load] Traditional Ads data fetch failed:', e.message);
+    client._tradLoaded = true;
+  }
+}
+
+function applyTraditionalData(config, rangeIndex) {
+  applySectionTitles('tmpl-traditional-ads', config);
+  function val(fieldId) {
+    const range = config[fieldId];
+    if (!range) return null;
+    const rows = rangeIndex[range];
+    if (!rows || !rows.length) return null;
+    return rows;
+  }
+  function singleVal(fieldId) {
+    const r = val(fieldId);
+    return r ? String(r[0][0] || '').trim() : null;
+  }
+
+  // Tab title
+  if (config.reportTabTitle) {
+    const tradReport = (currentClient.reports || []).find(r => r.type === 'traditional-ads');
+    if (tradReport) {
+      tradReport.label = config.reportTabTitle;
+      document.querySelectorAll('.tmpl-btn').forEach(btn => {
+        if (btn.dataset.type === 'traditional-ads') btn.textContent = config.reportTabTitle;
+      });
+      const sel = document.querySelector('.tmpl-select');
+      if (sel) {
+        Array.from(sel.options).forEach(opt => {
+          if (opt.value === 'traditional-ads') opt.textContent = config.reportTabTitle;
+        });
+      }
+    }
+  }
+
+  // KPIs
+  const tlbl = config.kpi_tlbl || '';
+  [{ id: 'clicks', invert: false }, { id: 'impr', invert: false }, { id: 'ctr', invert: false }].forEach(k => {
+    const v = singleVal('kpi_' + k.id);
+    const t = singleVal('kpi_' + k.id + '_trend');
+    if (v) document.getElementById('trad-kpi-' + k.id).textContent = v;
+    if (t) { const m = kpiTrendMode(config, k); setKpiTrend('trad-kpi-' + k.id + '-trend', 'trad-kpi-' + k.id + '-tlbl', t, tlbl, m.invert, m.neutral); }
+  });
+
+  // Ad placement table
+  const placementRows = val('placement_range');
+  const placementSection = document.getElementById('trad-placement-section');
+  if (placementRows && placementRows.length > 1) {
+    placementSection.style.display = '';
+    renderAudienceTable(placementRows, document.getElementById('trad-placement-table-wrap'));
+  } else {
+    placementSection.style.display = 'none';
+  }
+
+  setPinData('trad', val('location_range'));
+  renderTraditionalCreatives(config);
+
+  // Notes sections
+  applyNotesSection('trad-notes-performance-section', 'trad-notes-performance-title', config.notes_performance_label);
+  applyNotesSection('trad-notes-placement-section',   'trad-notes-placement-title',   config.notes_placement_label);
+  applyNotesSection('trad-notes-final-section',       'trad-notes-final-title',       config.notes_final_label);
+}
+
+// Creative reference: a filled title turns a slot on. Admins can upload to any titled
+// slot; clients only see titled slots that have an image. Runs again after saved
+// images are restored, so a new browser doesn't need a second Refresh to show them.
+function renderTraditionalCreatives(config) {
+  const section = document.getElementById('trad-content-section');
+  const grid = document.getElementById('trad-content-grid');
+  if (!section || !grid || !currentClient || !config) return;
+  grid.innerHTML = '';
+  TRAD_CREATIVE_SLOTS.forEach(slot => {
+    const title = config['creative' + slot + '_title'];
+    if (!title) return;
+    const hasImg = !!localStorage.getItem('link_v2_creative_trad_' + currentClient.id + '_' + slot);
+    if (hasImg || isAdminMode) grid.appendChild(buildContentCard(slot, title, [], currentClient.id, 'trad'));
+  });
+  section.style.display = grid.children.length ? '' : 'none';
+}
+
+async function fetchSalesDataAsync(client, salesCfg) {
+  if (!sheetsApiKey || !client.sheetId) return;
+  const rangesToFetch = [];
+  SALES_MAPPING_FIELDS.forEach(f => { if (salesCfg[f]) rangesToFetch.push(salesCfg[f]); });
+  if (!rangesToFetch.length) {
+    applySalesData(salesCfg, {});
+    client._salesLoaded = true;
+    return;
+  }
+  try {
+    const uniqueRanges = [...new Set(rangesToFetch)];
+    const rangeIndex = await resilientBatchFetch(client.sheetId, uniqueRanges);
+    client._salesConfig = salesCfg;
+    currentClient._salesConfig = salesCfg;
+    applySalesData(salesCfg, rangeIndex);
+    client._salesLoaded = true;
+    setConnStatus(true, 'Data Connection');
+  } catch(e) {
+    console.error('[Load] Sales data fetch failed:', e.message);
+    client._salesLoaded = true;
+  }
+}
+
+function applySalesData(cfg, rangeIndex) {
+  applySectionTitles('tmpl-sales', cfg);
+  function val(fieldId) {
+    const range = cfg[fieldId];
+    if (!range) return null;
+    const rows = rangeIndex[range];
+    if (!rows || !rows.length) return null;
+    return String(rows[0][0] ?? '').trim() || null;
+  }
+
+  // Tab title
+  if (cfg.reportTabTitle) {
+    const salesReport = (currentClient.reports || []).find(r => r.type === 'sales');
+    if (salesReport) {
+      salesReport.label = cfg.reportTabTitle;
+      document.querySelectorAll('.tmpl-btn').forEach(btn => {
+        if (btn.dataset.type === 'sales') btn.textContent = cfg.reportTabTitle;
+      });
+      const sel = document.querySelector('.tmpl-select');
+      if (sel) {
+        Array.from(sel.options).forEach(opt => {
+          if (opt.value === 'sales') opt.textContent = cfg.reportTabTitle;
+        });
+      }
+    }
+  }
+
+  // KPI boxes — a blank title uses the default name; n/a hides the box
+  let visibleCount = 0;
+  [1,2,3,4].forEach(n => {
+    const box = document.getElementById('sales-kpi-box-' + n);
+    const titleField = 'kpi' + n + '_title';
+    if ((cfg._naFields || []).includes(titleField)) {
+      box.style.display = 'none';
+      return;
+    }
+    box.style.display = '';
+    visibleCount++;
+    document.getElementById('sales-kpi-' + n + '-tag').textContent = cfg[titleField] || SALES_KPI_DEFAULTS[n];
+    setKpiVal('sales-kpi-' + n + '-val', val('kpi' + n + '_value'));
+    const dir = (cfg['kpi' + n + '_dir'] || '').toLowerCase().trim();
+    setKpiTrend('sales-kpi-' + n + '-trend', 'sales-kpi-' + n + '-tlbl', val('kpi' + n + '_trend'), cfg['kpi' + n + '_tlbl'] || '', dir === 'inverted', dir === 'neutral');
+  });
+  const grid = document.getElementById('sales-kpi-grid');
+  if (visibleCount > 0) grid.style.gridTemplateColumns = `repeat(${visibleCount}, 1fr)`;
+
+  applyNotesSection('sales-notes-insights-section', 'sales-notes-insights-title', cfg.notes_insights_label);
+}
+
+// ── PIN MAP (Spatial, Traditional Ads) ──
+// Location map range: one header row, then one row per location, read by position —
+// 0 name, 1 address or "latitude, longitude", 2 category, 3 detail, 4 detail.
+// A detail's column header is its label; a blank header shows the value alone.
+// Standard Mapbox lookups can't be stored, so addresses are only cached for this session.
+const PIN_MAPS = {
+  spa:  { type: 'spatial-ads',     one: 'Target Location', many: 'Target Locations' },
+  trad: { type: 'traditional-ads', one: 'Ad Placement',    many: 'Ad Placements' },
+};
+const PIN_FIT = { padding: { top: 70, bottom: 40, left: 50, right: 50 }, maxZoom: 15 };
+const PIN_COORDS = /^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/;
+const PIN_LOOKUP_BATCH = 8;
+const pinLookups = {};
+const pinState = {};
+Object.keys(PIN_MAPS).forEach(tpl => {
+  pinState[tpl] = { map: null, ready: false, runId: 0, pending: false, rows: [], headers: [], located: [],
+    shown: [], category: 'All', selected: null, zoomedIn: false, bounds: null, hoverPopup: null, pinPopup: null };
+});
+
+function pinEl(tpl, part) {
+  return document.getElementById(tpl + '-pin-' + part);
+}
+
+function setPinData(tpl, rows) {
+  const g = pinState[tpl];
+  g.runId++;
+  g.headers = (rows && rows[0]) || [];
+  g.rows = (rows || []).slice(1).map(row => ({
+    name: spaCell(row, 0), where: spaCell(row, 1), category: spaCell(row, 2),
+    details: [3, 4].map(col => ({ label: spaCell(g.headers, col), value: spaCell(row, col) })).filter(d => d.value),
+  })).filter(row => row.name && row.where);
+  g.category = 'All';
+  if (!g.rows.length || !mapboxToken || !window.mapboxgl) {
+    resetPinMap(tpl);
+    pinEl(tpl, 'section').style.display = 'none';
+    return;
+  }
+  pinEl(tpl, 'section').style.display = '';
+  g.pending = true;
+  if (activeTemplate === PIN_MAPS[tpl].type) activatePinMap(tpl);
+}
+
+// Maps start only when their tab is open, so they never measure a hidden container
+function activatePinMap(tpl) {
+  const g = pinState[tpl];
+  if (!g.rows.length) return;
+  if (!g.map) { initPinMap(tpl); return; }
+  if (!g.ready) return;
+  setTimeout(() => {
+    if (!g.map) return;
+    g.map.resize();
+    if (g.pending) loadPinLocations(tpl);
+    else if (g.bounds && g.selected === null && !g.zoomedIn) g.map.fitBounds(g.bounds, { ...PIN_FIT, duration: 0 });
+  }, 100);
+}
+
+function pinImage(scale) {
+  const ratio = 2;
+  const canvas = document.createElement('canvas');
+  canvas.width = 30 * ratio * scale;
+  canvas.height = 40 * ratio * scale;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(ratio * scale, ratio * scale);
+  const shape = new Path2D('M15 1C7.3 1 1 7.2 1 14.9 1 25.3 15 39 15 39s14-13.7 14-24.1C29 7.2 22.7 1 15 1z');
+  ctx.fillStyle = '#e8382d';
+  ctx.fill(shape);
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 1.6;
+  ctx.stroke(shape);
+  ctx.fillStyle = '#fff';
+  ctx.beginPath();
+  ctx.arc(15, 15, 5.2, 0, Math.PI * 2);
+  ctx.fill();
+  return ctx.getImageData(0, 0, canvas.width, canvas.height);
+}
+
+function initPinMap(tpl) {
+  const g = pinState[tpl];
+  mapboxgl.accessToken = mapboxToken;
+  const el = pinEl(tpl, 'map');
+  g.map = new mapboxgl.Map({ container: el, style: 'mapbox://styles/mapbox/light-v11', center: [-77.0369, 38.9072], zoom: 9, attributionControl: false });
+  g.map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
+  if (window.ResizeObserver) new ResizeObserver(() => { if (g.map) g.map.resize(); }).observe(el);
+  initPinEvents(tpl);
+  g.map.on('load', () => {
+    const map = g.map;
+    map.addImage('link-pin', pinImage(1), { pixelRatio: 2 });
+    map.addImage('link-pin-active', pinImage(1.22), { pixelRatio: 2 });
+    map.addSource('pins', { type: 'geojson', data: { type: 'FeatureCollection', features: [] }, cluster: true, clusterRadius: 38, clusterMaxZoom: 13 });
+    map.addLayer({ id: 'clusters', type: 'circle', source: 'pins', filter: ['has', 'point_count'], paint: {
+      'circle-color': '#e8382d', 'circle-stroke-color': '#fff', 'circle-stroke-width': 2,
+      'circle-radius': ['step', ['get', 'point_count'], 15, 5, 18, 15, 22],
+    } });
+    map.addLayer({ id: 'cluster-count', type: 'symbol', source: 'pins', filter: ['has', 'point_count'],
+      layout: { 'text-field': ['get', 'point_count_abbreviated'], 'text-size': 13, 'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'], 'text-allow-overlap': true },
+      paint: { 'text-color': '#fff' } });
+    map.addLayer({ id: 'pins', type: 'symbol', source: 'pins', filter: ['!', ['has', 'point_count']],
+      layout: { 'icon-image': 'link-pin', 'icon-anchor': 'bottom', 'icon-allow-overlap': true } });
+    map.addLayer({ id: 'pin-active', type: 'symbol', source: 'pins', filter: ['==', ['get', 'index'], -1],
+      layout: { 'icon-image': 'link-pin-active', 'icon-anchor': 'bottom', 'icon-allow-overlap': true } });
+    g.hoverPopup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false, offset: [0, -44], anchor: 'bottom', className: 'map-popup' });
+    g.pinPopup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false, offset: [0, -52], anchor: 'bottom', className: 'map-popup' });
+    map.on('mouseenter', 'clusters', () => { map.getCanvas().style.cursor = 'pointer'; });
+    map.on('mouseleave', 'clusters', () => { map.getCanvas().style.cursor = ''; });
+    map.on('mousemove', 'pins', e => {
+      map.getCanvas().style.cursor = 'pointer';
+      const index = e.features[0].properties.index;
+      if (index !== g.selected) g.hoverPopup.setLngLat(g.shown[index].at).setHTML(pinPopupHtml(g.shown[index])).addTo(map);
+    });
+    map.on('mouseleave', 'pins', () => { map.getCanvas().style.cursor = ''; g.hoverPopup.remove(); });
+    map.on('click', e => {
+      const hit = map.queryRenderedFeatures(e.point, { layers: ['clusters', 'pins'] })[0];
+      if (!hit) { g.pinPopup.remove(); g.selected = null; updatePinPanel(tpl); return; }
+      if (hit.layer.id === 'pins') { selectPin(tpl, hit.properties.index); return; }
+      map.getSource('pins').getClusterExpansionZoom(hit.properties.cluster_id, (err, zoom) => {
+        if (err) return;
+        g.zoomedIn = true;
+        updatePinPanel(tpl);
+        map.easeTo({ center: hit.geometry.coordinates, zoom: zoom + 0.2 });
+      });
+    });
+    g.ready = true;
+    map.resize();
+    if (g.pending) loadPinLocations(tpl);
+  });
+}
+
+function initPinEvents(tpl) {
+  pinEl(tpl, 'toggle').addEventListener('click', e => {
+    const btn = e.target.closest('.geo-pill-btn');
+    if (!btn) return;
+    pinState[tpl].category = btn.dataset.category;
+    renderPinCategories(tpl);
+    renderPins(tpl);
+  });
+  pinEl(tpl, 'track').addEventListener('click', e => {
+    const item = e.target.closest('.pin-item');
+    if (item) selectPin(tpl, Number(item.dataset.index));
+  });
+}
+
+async function lookupPin(where) {
+  const coords = where.match(PIN_COORDS);
+  if (coords) {
+    const lat = Number(coords[1]), lng = Number(coords[2]);
+    return Math.abs(lat) <= 90 && Math.abs(lng) <= 180 ? { lat, lng, how: 'coordinates' } : null;
+  }
+  if (pinLookups[where]) return pinLookups[where];
+  try {
+    const res = await fetch('https://api.mapbox.com/search/geocode/v6/forward?q=' + encodeURIComponent(where) + '&country=us&limit=1&access_token=' + mapboxToken);
+    if (!res.ok) return null;
+    const feature = (await res.json()).features?.[0];
+    if (!feature) return null;
+    const [lng, lat] = feature.geometry.coordinates;
+    pinLookups[where] = { lat, lng, how: 'address lookup', match: feature.properties?.full_address || feature.properties?.name || '' };
+    return pinLookups[where];
+  } catch (e) {
+    console.warn('[Pin map] Address lookup failed:', where, e.message);
+    return null;
+  }
+}
+
+async function loadPinLocations(tpl) {
+  const g = pinState[tpl];
+  const runId = ++g.runId;
+  g.pending = false;
+  pinEl(tpl, 'count').textContent = 'Loading…';
+  const results = [];
+  for (let i = 0; i < g.rows.length; i += PIN_LOOKUP_BATCH) {
+    results.push(...await Promise.all(g.rows.slice(i, i + PIN_LOOKUP_BATCH).map(row => lookupPin(row.where))));
+    if (runId !== g.runId) return;
+  }
+  const missed = [], lines = [];
+  g.located = [];
+  g.rows.forEach((row, i) => {
+    const found = results[i];
+    if (!found) {
+      missed.push(row.name);
+      lines.push('<b>' + escHtml(row.name) + '</b>: not found');
+      return;
+    }
+    g.located.push({ ...row, at: [found.lng, found.lat] });
+    lines.push('<b>' + escHtml(row.name) + '</b>: ' + found.how + (found.match ? ' matched "' + escHtml(found.match) + '"' : '')
+      + ' (' + found.lat.toFixed(4) + ', ' + found.lng.toFixed(4) + ')');
+  });
+  renderPinCategories(tpl);
+  renderPins(tpl);
+  const notice = pinEl(tpl, 'notice');
+  notice.textContent = missed.length ? 'Could not find: ' + missed.join(', ') + '. Check these in the sheet. Clients do not see this message.' : '';
+  notice.classList.toggle('show', missed.length > 0);
+  pinEl(tpl, 'check').innerHTML = lines.join('<br>');
+  if (!g.located.length && !isAdminMode) pinEl(tpl, 'section').style.display = 'none';
+}
+
+function renderPinCategories(tpl) {
+  const g = pinState[tpl];
+  const categories = [...new Set(g.located.map(p => p.category).filter(Boolean))];
+  if (!categories.includes(g.category)) g.category = 'All';
+  const showToggle = categories.length > 1;
+  pinEl(tpl, 'header').style.display = showToggle ? '' : 'none';
+  pinEl(tpl, 'title').textContent = g.category + ' ' + PIN_MAPS[tpl].many;
+  pinEl(tpl, 'toggle').innerHTML = showToggle ? ['All', ...categories].map(c =>
+    `<button class="geo-pill-btn${c === g.category ? ' active' : ''}" type="button" data-category="${escHtml(c)}">${escHtml(c)}</button>`).join('') : '';
+}
+
+function pinPopupHtml(pin) {
+  return '<div class="pin-popup-name">' + escHtml(pin.name) + '</div>';
+}
+
+function pinStatsHtml(pin) {
+  return pin.details.map(d => d.label
+    ? `<span class="pin-stat"><span class="pin-label">${escHtml(d.label)}</span><span class="pin-value">${escHtml(d.value)}</span></span>`
+    : `<span class="pin-solo">${escHtml(d.value)}</span>`).join('');
+}
+
+function renderPins(tpl) {
+  const g = pinState[tpl];
+  g.hoverPopup.remove();
+  g.pinPopup.remove();
+  g.selected = null;
+  g.zoomedIn = false;
+  g.shown = g.located.filter(p => g.category === 'All' || p.category === g.category);
+  g.map.getSource('pins').setData({ type: 'FeatureCollection', features: g.shown.map((p, index) => ({
+    type: 'Feature', properties: { index }, geometry: { type: 'Point', coordinates: p.at },
+  })) });
+  const track = pinEl(tpl, 'track');
+  track.innerHTML = g.shown.map((p, i) => `<button class="pin-item" type="button" data-index="${i}"><span class="pin-name">${escHtml(p.name)}</span>${pinStatsHtml(p)}</button>`).join('');
+  track.scrollTo(0, 0);
+  g.bounds = null;
+  if (g.shown.length) {
+    g.bounds = new mapboxgl.LngLatBounds();
+    g.shown.forEach(p => g.bounds.extend(p.at));
+    g.map.fitBounds(g.bounds, { ...PIN_FIT, duration: 600 });
+  }
+  updatePinPanel(tpl);
+}
+
+function updatePinPanel(tpl) {
+  const g = pinState[tpl], names = PIN_MAPS[tpl], count = g.shown.length;
+  pinEl(tpl, 'count').textContent = g.selected === null
+    ? count + ' ' + (count === 1 ? names.one : names.many)
+    : names.one + ' ' + (g.selected + 1) + ' of ' + count;
+  const all = pinEl(tpl, 'all');
+  all.textContent = 'View All ' + names.many;
+  all.classList.toggle('show', g.selected !== null || g.zoomedIn);
+  pinEl(tpl, 'track').querySelectorAll('.pin-item').forEach((el, i) => el.classList.toggle('active', i === g.selected));
+  if (g.map && g.map.getLayer('pin-active')) g.map.setFilter('pin-active', ['==', ['get', 'index'], g.selected === null ? -1 : g.selected]);
+}
+
+function selectPin(tpl, index) {
+  const g = pinState[tpl], pin = g.shown[index];
+  if (!pin) return;
+  g.selected = index;
+  g.zoomedIn = true;
+  g.hoverPopup.remove();
+  g.pinPopup.setLngLat(pin.at).setHTML(pinPopupHtml(pin)).addTo(g.map);
+  g.map.flyTo({ center: pin.at, zoom: 15, offset: [0, 50], duration: 900, essential: true });
+  updatePinPanel(tpl);
+  const track = pinEl(tpl, 'track');
+  const item = track.querySelector(`.pin-item[data-index="${index}"]`);
+  const t = track.getBoundingClientRect(), r = item.getBoundingClientRect();
+  track.scrollTo({ top: track.scrollTop + r.top - t.top - (t.height - r.height) / 2, left: track.scrollLeft + r.left - t.left - (t.width - r.width) / 2, behavior: 'smooth' });
+}
+
+function stepPin(tpl, direction) {
+  const g = pinState[tpl], count = g.shown.length;
+  if (!count) return;
+  selectPin(tpl, g.selected === null ? (direction > 0 ? 0 : count - 1) : (g.selected + direction + count) % count);
+}
+
+function viewAllPins(tpl) {
+  const g = pinState[tpl];
+  g.selected = null;
+  g.zoomedIn = false;
+  g.pinPopup.remove();
+  updatePinPanel(tpl);
+  if (g.bounds) g.map.fitBounds(g.bounds, { ...PIN_FIT, duration: 800 });
+}
+
+function resetPinMap(tpl) {
+  const g = pinState[tpl];
+  g.runId++;
+  Object.assign(g, { pending: false, rows: [], headers: [], located: [], shown: [], category: 'All', selected: null, zoomedIn: false, bounds: null });
+  if (g.ready) {
+    g.hoverPopup.remove();
+    g.pinPopup.remove();
+    g.map.getSource('pins').setData({ type: 'FeatureCollection', features: [] });
+  }
+  ['track', 'toggle', 'check'].forEach(part => { pinEl(tpl, part).innerHTML = ''; });
+  ['count', 'title'].forEach(part => { pinEl(tpl, part).textContent = ''; });
+  pinEl(tpl, 'header').style.display = 'none';
+  pinEl(tpl, 'all').classList.remove('show');
+  const notice = pinEl(tpl, 'notice');
+  notice.textContent = '';
+  notice.classList.remove('show');
 }
 
 async function fetchLinkedInDataAsync(client, liCfg) {
@@ -5363,6 +6311,34 @@ function resetClientUI() {
     if (lblEl) lblEl.textContent = '';
   });
 
+  // Reset Traditional KPIs
+  ['clicks','impr','ctr'].forEach(k => {
+    const valEl = document.getElementById('trad-kpi-' + k);
+    if (valEl) valEl.textContent = '—';
+    const trendEl = document.getElementById('trad-kpi-' + k + '-trend');
+    if (trendEl) { trendEl.style.display = 'none'; trendEl.textContent = ''; }
+    const lblEl = document.getElementById('trad-kpi-' + k + '-tlbl');
+    if (lblEl) lblEl.textContent = '';
+  });
+
+  // Reset Sales KPIs
+  [1,2,3,4].forEach(n => {
+    const box = document.getElementById('sales-kpi-box-' + n);
+    if (box) box.style.display = '';
+    const tagEl = document.getElementById('sales-kpi-' + n + '-tag');
+    if (tagEl) tagEl.textContent = SALES_KPI_DEFAULTS[n];
+    const valEl = document.getElementById('sales-kpi-' + n + '-val');
+    if (valEl) { valEl.textContent = '—'; valEl.className = 'kpi-val'; }
+    const tEl = document.getElementById('sales-kpi-' + n + '-trend');
+    if (tEl) { tEl.style.display = 'none'; tEl.textContent = ''; }
+    const lblEl = document.getElementById('sales-kpi-' + n + '-tlbl');
+    if (lblEl) lblEl.textContent = '';
+  });
+  const salesGrid = document.getElementById('sales-kpi-grid');
+  if (salesGrid) salesGrid.style.gridTemplateColumns = 'repeat(4, 1fr)';
+  const salesNotes = document.getElementById('sales-notes-insights-section');
+  if (salesNotes) salesNotes.style.display = 'none';
+
   // Reset overview KPIs
   [1,2,3,4].forEach(n => {
     const box = document.getElementById('ov-kpi-box-' + n);
@@ -5393,8 +6369,10 @@ function resetClientUI() {
    'disp-audience-section','disp-content-section','disp-geo-section','disp-demo-section',
    'yt-notes-performance-section','yt-audience-notes-section','yt-notes-final-section',
    'yt-audience-section','yt-content-section','yt-geo-section','yt-demo-section',
-   'spa-notes-performance-section','spa-audience-notes-section','spa-notes-media-section','spa-notes-final-section',
-   'spa-audience-section','spa-media-section','spa-content-section',
+   'spa-notes-performance-section','spa-audience-notes-section','spa-notes-media-section','spa-notes-device-section','spa-notes-final-section',
+   'spa-audience-section','spa-media-section','spa-device-section','spa-content-section',
+   'trad-notes-performance-section','trad-notes-placement-section','trad-notes-final-section',
+   'trad-placement-section','trad-content-section','spa-pin-section','trad-pin-section',
    'li-notes-performance-section','li-audience-notes-section','li-notes-final-section',
    'li-audience-section','li-content-section'].forEach(id => {
     const el = document.getElementById(id);
@@ -5416,10 +6394,13 @@ function resetClientUI() {
   if (ytAudWrap) ytAudWrap.innerHTML = '<div class="audience-empty">No audience data configured</div>';
   const spaAudWrap = document.getElementById('spa-audience-table-wrap');
   if (spaAudWrap) spaAudWrap.innerHTML = '<div class="audience-empty">No audience data configured</div>';
-  resetSpatialMedia();
+  resetSpatialRibbons();
+  Object.keys(PIN_MAPS).forEach(resetPinMap);
+  const tradTableWrap = document.getElementById('trad-placement-table-wrap');
+  if (tradTableWrap) tradTableWrap.innerHTML = '<div class="audience-empty">No ad placement data configured</div>';
 
   // Reset top content grids
-  ['meta-content-grid','fb-content-grid','ig-content-grid','disp-content-grid','yt-content-grid','spa-content-grid'].forEach(id => {
+  ['meta-content-grid','fb-content-grid','ig-content-grid','disp-content-grid','yt-content-grid','spa-content-grid','trad-content-grid'].forEach(id => {
     const grid = document.getElementById(id);
     if (grid) grid.innerHTML = '';
   });
@@ -5500,6 +6481,7 @@ async function bootClient(client) {
   });
   // Clear any stale localStorage creatives first, then write fresh Firestore values
   restoreCreatives(client.id, fsCreatives);
+  renderTraditionalCreatives(client._tradConfig);
   // Cache logo from Firestore, then apply to header + overview hero
   if (fsLogoUrl) {
     saveClientLogo(client.id, fsLogoUrl);
@@ -5810,6 +6792,16 @@ function switchTemplate(type, reports) {
     if (ytCfg) fetchYouTubeDataAsync(currentClient, ytCfg);
   }
 
+  if (type === 'sales' && currentClient && !currentClient._salesLoaded) {
+    const salesCfg = currentClient._salesConfig;
+    if (salesCfg) fetchSalesDataAsync(currentClient, salesCfg);
+  }
+
+  if (type === 'traditional-ads' && currentClient && !currentClient._tradLoaded) {
+    const tradCfg = currentClient._tradConfig;
+    if (tradCfg) fetchTraditionalDataAsync(currentClient, tradCfg);
+  }
+
   if (type === 'spatial-ads' && currentClient && !currentClient._spaLoaded) {
     const spaCfg = currentClient._spaConfig;
     if (spaCfg) fetchSpatialDataAsync(currentClient, spaCfg);
@@ -5830,25 +6822,11 @@ function switchTemplate(type, reports) {
       if (!GEO_TEMPLATES.yt.map) initGeoMap('yt');
       else setTimeout(() => GEO_TEMPLATES.yt.map.resize(), 100);
     }
-    if (currentClient && currentClient._ytDemoData) {
-      const d = currentClient._ytDemoData;
-      renderDonuts(d.gender, d.age, d.income,
-        'yt-donut-gender', 'yt-dleg-gender',
-        'yt-donut-age',    'yt-dleg-age',
-        'yt-donut-income', 'yt-dleg-income');
-    }
   }
   if (type === 'display-ads') {
     if (mapboxToken && document.getElementById('disp-geo-section') && document.getElementById('disp-geo-section').style.display !== 'none') {
       if (!GEO_TEMPLATES.disp.map) initGeoMap('disp');
       else setTimeout(() => GEO_TEMPLATES.disp.map.resize(), 100);
-    }
-    if (currentClient && currentClient._dispDemoData) {
-      const d = currentClient._dispDemoData;
-      renderDonuts(d.gender, d.age, d.income,
-        'disp-donut-gender', 'disp-dleg-gender',
-        'disp-donut-age',    'disp-dleg-age',
-        'disp-donut-income', 'disp-dleg-income');
     }
   }
   if (type === 'google-search') {
@@ -5856,37 +6834,37 @@ function switchTemplate(type, reports) {
       if (!GEO_TEMPLATES.gs.map) initGeoMap('gs');
       else setTimeout(() => GEO_TEMPLATES.gs.map.resize(), 100);
     }
-    if (currentClient && currentClient._gsDemoData) {
-      const d = currentClient._gsDemoData;
-      renderDonuts(d.gender, d.age, d.income);
-    }
   }
-  if (type === 'meta-ads') {
-    if (currentClient && currentClient._metaDemoData) {
-      const d = currentClient._metaDemoData;
-      renderDonuts(d.gender, d.age, null,
-        'meta-donut-gender', 'meta-dleg-gender',
-        'meta-donut-age',    'meta-dleg-age',
-        null, null);
-    }
-  }
-  if (type === 'facebook-ads') {
-    if (currentClient && currentClient._fbDemoData) {
-      const d = currentClient._fbDemoData;
-      renderDonuts(d.gender, d.age, null,
-        'fb-donut-gender', 'fb-dleg-gender',
-        'fb-donut-age',    'fb-dleg-age',
-        null, null);
-    }
-  }
-  if (type === 'instagram-ads') {
-    if (currentClient && currentClient._igDemoData) {
-      const d = currentClient._igDemoData;
-      renderDonuts(d.gender, d.age, null,
-        'ig-donut-gender', 'ig-dleg-gender',
-        'ig-donut-age',    'ig-dleg-age',
-        null, null);
-    }
+  const pinTpl = Object.keys(PIN_MAPS).find(tpl => PIN_MAPS[tpl].type === type);
+  if (pinTpl) activatePinMap(pinTpl);
+
+  renderActiveDemoDonuts(type);
+}
+
+// Demographic donut targets by report type. An income ID of null means the template has no income donut.
+const DONUT_TEMPLATES = {
+  'google-search': { data: '_gsDemoData',   gender: ['donut-gender', 'dleg-gender'],           age: ['donut-age', 'dleg-age'],           income: ['donut-income', 'dleg-income'] },
+  'meta-ads':      { data: '_metaDemoData', gender: ['meta-donut-gender', 'meta-dleg-gender'], age: ['meta-donut-age', 'meta-dleg-age'], income: [null, null] },
+  'facebook-ads':  { data: '_fbDemoData',   gender: ['fb-donut-gender', 'fb-dleg-gender'],     age: ['fb-donut-age', 'fb-dleg-age'],     income: [null, null] },
+  'instagram-ads': { data: '_igDemoData',   gender: ['ig-donut-gender', 'ig-dleg-gender'],     age: ['ig-donut-age', 'ig-dleg-age'],     income: [null, null] },
+  'display-ads':   { data: '_dispDemoData', gender: ['disp-donut-gender', 'disp-dleg-gender'], age: ['disp-donut-age', 'disp-dleg-age'], income: ['disp-donut-income', 'disp-dleg-income'] },
+  'youtube-ads':   { data: '_ytDemoData',   gender: ['yt-donut-gender', 'yt-dleg-gender'],     age: ['yt-donut-age', 'yt-dleg-age'],     income: ['yt-donut-income', 'yt-dleg-income'] },
+};
+
+// Draws donuts only for the visible template. ECharts must start in a visible container;
+// hidden templates draw from their stored data when their tab opens.
+function renderActiveDemoDonuts(type) {
+  const tpl = DONUT_TEMPLATES[type];
+  if (!tpl || type !== activeTemplate || !currentClient) return;
+  const d = currentClient[tpl.data];
+  if (!d) return;
+  try {
+    renderDonuts(d.gender, d.age, tpl.income[0] ? d.income : null,
+      tpl.gender[0], tpl.gender[1],
+      tpl.age[0],    tpl.age[1],
+      tpl.income[0], tpl.income[1]);
+  } catch(e) {
+    console.error('[Donuts] Render failed for', type, ':', e.message);
   }
 }
 
@@ -5986,6 +6964,7 @@ function applySheetData(mapping, rangeIndex) {
   applyNotesSection('gs-notes-audience-section',    'gs-notes-audience-title',    currentClient.notes_audience_label);
   applyNotesSection('gs-notes-keywords-section',    'gs-notes-keywords-title',    currentClient.notes_keywords_label);
   applyNotesSection('gs-notes-final-section',       'gs-notes-final-title',       currentClient.notes_final_label);
+  renderActiveDemoDonuts('google-search');
 }
 
 /* ══════════════════════════════════════
@@ -6416,6 +7395,9 @@ function renderDonuts(
   ageCanvasId, ageLegId,
   incomeCanvasId, incomeLegId
 ) {
+  // A null income ID means this template has no income donut. Check before the defaults below.
+  const hasIncome = incomeCanvasId !== null;
+
   // Default IDs for Google Search template
   genderCanvasId  = genderCanvasId  || 'donut-gender';
   genderLegId     = genderLegId     || 'dleg-gender';
@@ -6437,12 +7419,12 @@ function renderDonuts(
   renderSingleDonutECharts(genderCanvasId, isMeta ? null : genderLegId, genderFiltered, isMeta);
   renderSingleDonutECharts(ageCanvasId, isMeta ? null : ageLegId, ageData || ageFallback, isMeta);
 
-  // Income — GS only
-  if (!isMeta) {
-    const incomeEl = document.getElementById(incomeCanvasId);
+  // Income — Google Search, Display, and YouTube
+  if (hasIncome) {
+    // Only Google Search restores its income card here; its body must not receive another template's IDs
     const incomeBody = document.getElementById('donut-income-body');
-    if (incomeBody && !incomeEl) {
-      incomeBody.innerHTML = `<div class="dnut-wrap" id="${incomeCanvasId}"></div><div class="dleg" id="${incomeLegId}"></div>`;
+    if (incomeCanvasId === 'donut-income' && incomeBody && !document.getElementById('donut-income')) {
+      incomeBody.innerHTML = '<div class="dnut-wrap" id="donut-income"></div><div class="dleg dleg-fixed" id="dleg-income"></div>';
     }
     renderSingleDonutECharts(incomeCanvasId, incomeLegId, incomeData || incomeFallback, false);
   }
@@ -6591,6 +7573,7 @@ function applyMetaData(config, rangeIndex) {
   applyNotesSection('meta-notes-performance-section', 'meta-notes-performance-title', config.notes_performance_label);
   applyNotesSection('meta-audience-notes-section',    'meta-notes-audience-title',    config.notes_audience_label);
   applyNotesSection('meta-notes-final-section',       'meta-notes-final-title',       config.notes_final_label);
+  renderActiveDemoDonuts('meta-ads');
 }
 
 function renderAudienceTable(rows, wrap) {
@@ -6642,6 +7625,7 @@ function buildContentCard(slot, label, rows, clientId, tmplPrefix) {
     : tmplPrefix === 'disp' ? '_dispConfig'
     : tmplPrefix === 'yt'   ? '_ytConfig'
     : tmplPrefix === 'spa'  ? '_spaConfig'
+    : tmplPrefix === 'trad' ? '_tradConfig'
     : tmplPrefix === 'li'   ? '_liConfig'
     : '_metaConfig';
   const labelStr = (currentClient && currentClient[cfgKey] && currentClient[cfgKey].content_metric_labels) || '';
@@ -7530,6 +8514,14 @@ document.getElementById('refresh-btn').addEventListener('click', async () => {
           const cfg = await fetchClientConfig(currentClient.sheetId, r.configTab, YT_CONFIG_FIELD_MAP, YT_VALUE_FIELDS, YT_MAPPING_FIELDS);
           return { ...cfg, _reportType: 'youtube-ads' };
         }
+        if (r.type === 'sales') {
+          const cfg = await fetchClientConfig(currentClient.sheetId, r.configTab, SALES_CONFIG_FIELD_MAP, SALES_VALUE_FIELDS, SALES_MAPPING_FIELDS);
+          return { ...cfg, _reportType: 'sales' };
+        }
+        if (r.type === 'traditional-ads') {
+          const cfg = await fetchClientConfig(currentClient.sheetId, r.configTab, TRAD_CONFIG_FIELD_MAP, TRAD_VALUE_FIELDS, TRAD_MAPPING_FIELDS);
+          return { ...cfg, _reportType: 'traditional-ads' };
+        }
         if (r.type === 'spatial-ads') {
           const cfg = await fetchClientConfig(currentClient.sheetId, r.configTab, SPA_CONFIG_FIELD_MAP, SPA_VALUE_FIELDS, SPA_MAPPING_FIELDS);
           return { ...cfg, _reportType: 'spatial-ads' };
@@ -7557,19 +8549,22 @@ document.getElementById('refresh-btn').addEventListener('click', async () => {
     const dispCfg = configs.find(c => c && c._reportType === 'display-ads');
     const ytCfg   = configs.find(c => c && c._reportType === 'youtube-ads');
     const spaCfg  = configs.find(c => c && c._reportType === 'spatial-ads');
+    const tradCfg = configs.find(c => c && c._reportType === 'traditional-ads');
+    const salesCfg = configs.find(c => c && c._reportType === 'sales');
     const liCfg  = configs.find(c => c && c._reportType === 'linkedin-ads');
     const ovCfg   = configs.find(c => c && c._reportType === 'overview');
 
-    if (gsCfg)   { [...CONFIG_VALUE_FIELDS, ...CONFIG_MAPPING_FIELDS].forEach(f => { if (gsCfg[f] !== undefined) currentClient[f] = gsCfg[f]; }); }
-    // Title overrides are always overwritten (even with undefined) so a cleared config row
-    // reverts to the default on refresh instead of keeping the previous title
-    if (gsCfg)   { SECTION_TITLE_FIELDS.forEach(f => { currentClient[f] = gsCfg[f]; }); }
+    // Always overwrite, even with undefined, so a removed or cleared config row takes effect on Refresh.
+    // A failed config fetch leaves gsCfg null and keeps the last good values.
+    if (gsCfg)   { [...CONFIG_VALUE_FIELDS, ...CONFIG_MAPPING_FIELDS].forEach(f => { currentClient[f] = gsCfg[f]; }); }
     if (metaCfg) { currentClient._metaConfig = metaCfg; currentClient._metaLoaded = false; }
     if (fbCfg)   { currentClient._fbConfig = fbCfg; currentClient._fbLoaded = false; }
     if (igCfg)   { currentClient._igConfig = igCfg; currentClient._igLoaded = false; }
     if (dispCfg) { currentClient._dispConfig = dispCfg; currentClient._dispLoaded = false; }
     if (ytCfg)   { currentClient._ytConfig = ytCfg;   currentClient._ytLoaded = false; }
     if (spaCfg)  { currentClient._spaConfig = spaCfg; currentClient._spaLoaded = false; }
+    if (tradCfg) { currentClient._tradConfig = tradCfg; currentClient._tradLoaded = false; }
+    if (salesCfg) { currentClient._salesConfig = salesCfg; currentClient._salesLoaded = false; }
     if (liCfg)   { currentClient._liConfig = liCfg; currentClient._liLoaded = false; }
     if (ovCfg)   { currentClient._overviewConfig = ovCfg; currentClient._overviewLoaded = false; }
 
@@ -7582,6 +8577,8 @@ document.getElementById('refresh-btn').addEventListener('click', async () => {
     if (dispCfg) dataPromises.push(fetchDisplayDataAsync(currentClient, dispCfg));
     if (ytCfg)   dataPromises.push(fetchYouTubeDataAsync(currentClient, ytCfg));
     if (spaCfg)  dataPromises.push(fetchSpatialDataAsync(currentClient, spaCfg));
+    if (tradCfg) dataPromises.push(fetchTraditionalDataAsync(currentClient, tradCfg));
+    if (salesCfg) dataPromises.push(fetchSalesDataAsync(currentClient, salesCfg));
     if (liCfg)   dataPromises.push(fetchLinkedInDataAsync(currentClient, liCfg));
     if (ovCfg)   dataPromises.push(fetchOverviewDataAsync(currentClient, ovCfg));
     await Promise.all(dataPromises);
@@ -7601,6 +8598,7 @@ document.getElementById('refresh-btn').addEventListener('click', async () => {
       initNoteView(id, notes[key] || '');
     });
     restoreCreatives(currentClient.id, fsCreatives);
+    renderTraditionalCreatives(currentClient._tradConfig);
     if (fsLogoUrl) {
       saveClientLogo(currentClient.id, fsLogoUrl);
     } else {
